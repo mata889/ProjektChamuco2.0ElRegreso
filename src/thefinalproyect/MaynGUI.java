@@ -379,27 +379,29 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ListarCamposActionPerformed
 
     private void CrearCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCamposActionPerformed
-        BufferedReader br=null;
+        BufferedReader br = null;
         try {
-            br=new BufferedReader(new FileReader(ArchivoActual));
-            
+            br = new BufferedReader(new FileReader(ArchivoActual));
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
 
-        } else try {
-            if (br.readLine()!=null) {
-                JOptionPane.showMessageDialog(this, "Ya existe Los Campos");
-            } else {
-                AgregarCampos.pack();
-                AgregarCampos.show();
-                AgregarCampos.setVisible(true);
-                AgregarCampos.setEnabled(true);
+        } else {
+            try {
+                if (br.readLine() != null) {
+                    JOptionPane.showMessageDialog(this, "Ya existe Los Campos");
+                } else {
+                    AgregarCampos.pack();
+                    AgregarCampos.show();
+                    AgregarCampos.setVisible(true);
+                    AgregarCampos.setEnabled(true);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_CrearCamposActionPerformed
@@ -430,10 +432,15 @@ public class MaynGUI extends javax.swing.JFrame {
             FileWriter fw = null;
             BufferedWriter bw = null;
             try {
+                fw = new FileWriter(ArchivoActual, true);
+            } catch (IOException ex) {
+                Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            bw = new BufferedWriter(fw);
+            try {
                 for (int i = 0; i < Modelo.getSize(); i++) {
                     Campos CL = (Campos) Modelo.get(i);
-                    fw = new FileWriter(ArchivoActual, true);
-                    bw = new BufferedWriter(fw);
+
                     bw.write(CL.toString());
 
                 }
