@@ -1,6 +1,6 @@
 package thefinalproyect;
 
-public class ArbolitoB {
+public class ArbolitoB {//un arbol en base a numeros
 
     int orden;//orden del arbol 
     NodosB raiz;//raiz del arbol
@@ -61,7 +61,7 @@ public class ArbolitoB {
             Ninsert(x.hijo[j], llave);
         }
     }
-
+//metodo de insercion de la llave, ya que esta llave es numeros solamente
     public void insert(ArbolitoB t, int llave) {
         NodosB r = t.raiz;
         if (r.contador == 2 * orden - 1) {
@@ -111,7 +111,7 @@ public class ArbolitoB {
             return Buscar(raiz.getHijo(i), llave);
         }
     }
-    
+    //borra llave del arbol pero no del archivo, aun
     public void Borrar(ArbolitoB t,int llave){
        NodosB temp=new NodosB(orden,null);
        temp=Buscar(t.raiz,llave);
@@ -128,4 +128,25 @@ public class ArbolitoB {
             System.out.println("Este nodo no es una hoja o tiene menos de una llave");
         }
     }
+    //este metodo nos ayuda a imprimir la linea o en el nivel en que esta la llave
+    public void ImpBuscar( ArbolitoB T,int x)
+	{
+		NodosB temp= new NodosB(orden,null);
+
+		temp= Buscar(T.raiz,x);
+
+		if (temp==null)
+		{
+
+		System.out.println("No existe la llave");
+		}
+
+		else
+		{
+
+		print(temp);
+		}
+
+
+	}
 }
