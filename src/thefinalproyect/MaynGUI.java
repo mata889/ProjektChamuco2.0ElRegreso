@@ -9,19 +9,25 @@ import static com.sun.xml.internal.fastinfoset.alphabet.BuiltInRestrictedAlphabe
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.StringTokenizer;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.stream.Stream;
 import javafx.stage.FileChooser;
 import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
@@ -74,6 +80,12 @@ public class MaynGUI extends javax.swing.JFrame {
         jt_BorrarCampos = new javax.swing.JTable();
         jb_BorrarCampo = new javax.swing.JButton();
         jb_BorrandoCampos = new javax.swing.JButton();
+        Registros = new javax.swing.JDialog();
+        jPanel6 = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jt_Registros = new javax.swing.JTable();
+        bt_siguiente = new javax.swing.JButton();
+        bt_anterio = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -87,12 +99,11 @@ public class MaynGUI extends javax.swing.JFrame {
         ModificarCampos = new javax.swing.JMenuItem();
         BorrarCampos = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        CargarPrueba = new javax.swing.JMenuItem();
         IntroducirRegistros = new javax.swing.JMenuItem();
+        ListarRegistros = new javax.swing.JMenuItem();
         ModificarRegistros = new javax.swing.JMenuItem();
         BuscarRegistros = new javax.swing.JMenuItem();
         BorrarRegistros = new javax.swing.JMenuItem();
-        ListarRegistros = new javax.swing.JMenuItem();
         CruzarArchivos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         CrearIndice = new javax.swing.JMenuItem();
@@ -377,6 +388,78 @@ public class MaynGUI extends javax.swing.JFrame {
             .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
+        Registros.setTitle("Modificacion de campos");
+
+        jPanel6.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_Registros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jt_Registros.setRowSelectionAllowed(false);
+        jt_Registros.getTableHeader().setReorderingAllowed(false);
+        jScrollPane5.setViewportView(jt_Registros);
+
+        bt_siguiente.setText("Siguiente");
+        bt_siguiente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_siguienteActionPerformed(evt);
+            }
+        });
+
+        bt_anterio.setText("Anterior");
+        bt_anterio.addHierarchyListener(new java.awt.event.HierarchyListener() {
+            public void hierarchyChanged(java.awt.event.HierarchyEvent evt) {
+                bt_anterioHierarchyChanged(evt);
+            }
+        });
+        bt_anterio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bt_anterioActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 827, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(bt_anterio)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bt_siguiente)
+                .addGap(48, 48, 48))
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 381, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bt_siguiente)
+                    .addComponent(bt_anterio)))
+        );
+
+        javax.swing.GroupLayout RegistrosLayout = new javax.swing.GroupLayout(Registros.getContentPane());
+        Registros.getContentPane().setLayout(RegistrosLayout);
+        RegistrosLayout.setHorizontalGroup(
+            RegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        RegistrosLayout.setVerticalGroup(
+            RegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu2.setText("Archivo");
@@ -461,23 +544,40 @@ public class MaynGUI extends javax.swing.JFrame {
 
         jMenu3.setText("Registros");
 
-        CargarPrueba.setText("Cargar Registros de Prueba");
-        jMenu3.add(CargarPrueba);
-
         IntroducirRegistros.setText("Crear Registros");
+        IntroducirRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                IntroducirRegistrosActionPerformed(evt);
+            }
+        });
         jMenu3.add(IntroducirRegistros);
 
+        ListarRegistros.setText("Listar Registros");
+        ListarRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ListarRegistrosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ListarRegistros);
+
         ModificarRegistros.setText("Modificar Registros");
+        ModificarRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ModificarRegistrosActionPerformed(evt);
+            }
+        });
         jMenu3.add(ModificarRegistros);
 
         BuscarRegistros.setText("Buscar Registros");
         jMenu3.add(BuscarRegistros);
 
         BorrarRegistros.setText("Borrar Registros");
+        BorrarRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BorrarRegistrosActionPerformed(evt);
+            }
+        });
         jMenu3.add(BorrarRegistros);
-
-        ListarRegistros.setText("Listar Registros");
-        jMenu3.add(ListarRegistros);
 
         CruzarArchivos.setText("Cruzar Archivos");
         jMenu3.add(CruzarArchivos);
@@ -559,6 +659,7 @@ public class MaynGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
             ArchivoActual = null;
+            JOptionPane.showMessageDialog(this, "Se ha cerrado el archivo");
         }
     }//GEN-LAST:event_CerrarArchivoActionPerformed
 
@@ -567,20 +668,25 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearIndiceActionPerformed
 
     private void ListarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCamposActionPerformed
+
         String cadena = "";
         String cadena2 = "";
         ArrayList CamposLeido2 = new ArrayList();
+        DefaultTableModel modelT = (DefaultTableModel) jt_Campos.getModel();
+        for (int i = (modelT.getRowCount() - 1); i >= 0; i--) {
+            modelT.removeRow(i);
+        }
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
             //Leyendo el archivo
             BufferedReader br = null;
             FileReader fr = null;
-            try{
+            try {
                 fr = new FileReader(ArchivoActual);
                 br = new BufferedReader(fr);
                 cadena = br.readLine();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("ERROR!!ERROR!!ERROR!!");
             }
             ////////////////////////////////
@@ -590,82 +696,83 @@ public class MaynGUI extends javax.swing.JFrame {
                 cadena2 = cadena2 + ";" + tokens.nextToken();
                 System.out.println(cadena2);
             }
-        }
-        if (cadena2 != "") {
-            StringTokenizer tokens2;
-            tokens2 = new StringTokenizer(cadena2, ";");
-            while(tokens2.hasMoreTokens()){
-                CamposLeidos.add(tokens2.nextToken());                
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
             }
-            for (int i = 0; i < CamposLeidos.size(); i++) {
-                System.out.println(CamposLeidos.get(i));
-            }
-            
-        }else{
-            System.out.println("No hay nada");
-        }
-        String palabra = "";
-        int largo = -1;
-        if(CamposLeidos.size() != 0){
-            for (int i = 0; i < CamposLeidos.size(); i++) {
-                if((CamposLeidos.get(i)).charAt(0) == 'S' || (CamposLeidos.get(i)).charAt(0) == 's'){
-                    CamposLeido2.add("String");
-                    largo = (CamposLeidos.get(i)).length();
-                    for (int j = 7; j < largo; j++) {
-                        palabra +=(CamposLeidos.get(i)).charAt(j);
+            String palabra = "";
+            int largo = -1;
+            if (CamposLeidos.size() != 0) {
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    if ((CamposLeidos.get(i)).charAt(0) == 'S' || (CamposLeidos.get(i)).charAt(0) == 's') {
+                        CamposLeido2.add("String");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'I' || (CamposLeidos.get(i)).charAt(0) == 'i') {
+                        CamposLeido2.add("Int");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 4; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'C' || (CamposLeidos.get(i)).charAt(0) == 'c') {
+                        CamposLeido2.add("Char");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'L' || (CamposLeidos.get(i)).charAt(0) == 'l') {
+                        CamposLeido2.add("Long");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'D' || (CamposLeidos.get(i)).charAt(0) == 'd') {
+                        CamposLeido2.add("Double");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
                     }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos.get(i)).charAt(0) == 'I' || (CamposLeidos.get(i)).charAt(0) == 'i'){
-                    CamposLeido2.add("Int");
-                    largo = (CamposLeidos.get(i)).length();
-                    for (int j = 4; j < largo; j++) {
-                        palabra +=(CamposLeidos.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos.get(i)).charAt(0) == 'C' || (CamposLeidos.get(i)).charAt(0) == 'c'){
-                    CamposLeido2.add("Char");
-                    largo = (CamposLeidos.get(i)).length();
-                    for (int j = 5; j < largo; j++) {
-                        palabra +=(CamposLeidos.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos.get(i)).charAt(0) == 'L' || (CamposLeidos.get(i)).charAt(0) == 'l'){
-                    CamposLeido2.add("Long");
-                    largo = (CamposLeidos.get(i)).length();
-                    for (int j = 5; j < largo; j++) {
-                        palabra +=(CamposLeidos.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos.get(i)).charAt(0) == 'D' || (CamposLeidos.get(i)).charAt(0) == 'd'){
-                    CamposLeido2.add("Double");
-                    largo = (CamposLeidos.get(i)).length();
-                    for (int j = 7; j < largo; j++) {
-                        palabra +=(CamposLeidos.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
                 }
             }
-        }
-        TablaCampos.pack();
-        TablaCampos.show();
-        TablaCampos.setVisible(true);
-        TablaCampos.setEnabled(true);
-        for (int i = 0; i < CamposLeido2.size(); i++) {
-            System.out.println(CamposLeido2.get(i));
-        }
-        DefaultTableModel modelT = (DefaultTableModel)jt_Campos.getModel();
-        for (int i = 0; i < CamposLeido2.size(); i++) {
-            if(i%2==0){
-            Object[] row = {CamposLeido2.get(i),CamposLeido2.get(i+1)};
-            modelT.addRow(row);
+            TablaCampos.pack();
+            TablaCampos.show();
+            TablaCampos.setVisible(true);
+            TablaCampos.setEnabled(true);
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                System.out.println(CamposLeido2.get(i));
             }
+
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                if (i % 2 == 0) {
+                    Object[] row = {CamposLeido2.get(i), CamposLeido2.get(i + 1)};
+                    modelT.addRow(row);
+                }
+            }
+            CamposLeidos.clear();
         }
-        CamposLeidos.clear();
+
     }//GEN-LAST:event_ListarCamposActionPerformed
 
     private void CrearCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCamposActionPerformed
@@ -759,18 +866,22 @@ public class MaynGUI extends javax.swing.JFrame {
     private void ModificarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCamposActionPerformed
         String cadena = "";
         String cadena2 = "";
+        DefaultTableModel modelT = (DefaultTableModel) jt_CamposMod.getModel();
         ArrayList CamposLeido2 = new ArrayList();
+        for (int i = (modelT.getRowCount() - 1); i >= 0; i--) {
+            modelT.removeRow(i);
+        }
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
             //Leyendo el archivo
             BufferedReader br = null;
             FileReader fr = null;
-            try{
+            try {
                 fr = new FileReader(ArchivoActual);
                 br = new BufferedReader(fr);
                 cadena = br.readLine();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("ERROR!!ERROR!!ERROR!!");
             }
             ////////////////////////////////
@@ -780,87 +891,93 @@ public class MaynGUI extends javax.swing.JFrame {
                 cadena2 = cadena2 + ";" + tokens.nextToken();
                 System.out.println(cadena2);
             }
-        }
-        if (cadena2 != "") {
-            StringTokenizer tokens2;
-            tokens2 = new StringTokenizer(cadena2, ";");
-            while(tokens2.hasMoreTokens()){
-                CamposLeidos2.add(tokens2.nextToken());                
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos2.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos2.size(); i++) {
+                    System.out.println(CamposLeidos2.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
             }
-            for (int i = 0; i < CamposLeidos2.size(); i++) {
-                System.out.println(CamposLeidos2.get(i));
-            }
-            
-        }else{
-            System.out.println("No hay nada");
-        }
-        String palabra = "";
-        int largo = -1;
-        if(CamposLeidos2.size() != 0){
-            for (int i = 0; i < CamposLeidos2.size(); i++) {
-                if((CamposLeidos2.get(i)).charAt(0) == 'S' || (CamposLeidos2.get(i)).charAt(0) == 's'){
-                    CamposLeido2.add("String");
-                    largo = (CamposLeidos2.get(i)).length();
-                    for (int j = 7; j < largo; j++) {
-                        palabra +=(CamposLeidos2.get(i)).charAt(j);
+            String palabra = "";
+            int largo = -1;
+            if (CamposLeidos2.size() != 0) {
+                for (int i = 0; i < CamposLeidos2.size(); i++) {
+                    if ((CamposLeidos2.get(i)).charAt(0) == 'S' || (CamposLeidos2.get(i)).charAt(0) == 's') {
+                        CamposLeido2.add("String");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'I' || (CamposLeidos2.get(i)).charAt(0) == 'i') {
+                        CamposLeido2.add("Int");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 4; j < largo; j++) {
+                            palabra += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'C' || (CamposLeidos2.get(i)).charAt(0) == 'c') {
+                        CamposLeido2.add("Char");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'L' || (CamposLeidos2.get(i)).charAt(0) == 'l') {
+                        CamposLeido2.add("Long");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'D' || (CamposLeidos2.get(i)).charAt(0) == 'd') {
+                        CamposLeido2.add("Double");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
                     }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos2.get(i)).charAt(0) == 'I' || (CamposLeidos2.get(i)).charAt(0) == 'i'){
-                    CamposLeido2.add("Int");
-                    largo = (CamposLeidos2.get(i)).length();
-                    for (int j = 4; j < largo; j++) {
-                        palabra +=(CamposLeidos2.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos2.get(i)).charAt(0) == 'C' || (CamposLeidos2.get(i)).charAt(0) == 'c'){
-                    CamposLeido2.add("Char");
-                    largo = (CamposLeidos2.get(i)).length();
-                    for (int j = 5; j < largo; j++) {
-                        palabra +=(CamposLeidos2.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos2.get(i)).charAt(0) == 'L' || (CamposLeidos2.get(i)).charAt(0) == 'l'){
-                    CamposLeido2.add("Long");
-                    largo = (CamposLeidos2.get(i)).length();
-                    for (int j = 5; j < largo; j++) {
-                        palabra +=(CamposLeidos2.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos2.get(i)).charAt(0) == 'D' || (CamposLeidos2.get(i)).charAt(0) == 'd'){
-                    CamposLeido2.add("Double");
-                    largo = (CamposLeidos2.get(i)).length();
-                    for (int j = 7; j < largo; j++) {
-                        palabra +=(CamposLeidos2.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
                 }
             }
-        }
-        ModCampos.pack();
-        ModCampos.show();
-        ModCampos.setVisible(true);
-        ModCampos.setEnabled(true);
-        for (int i = 0; i < CamposLeido2.size(); i++) {
-            System.out.println(CamposLeido2.get(i));
-        }
-        DefaultTableModel modelT = (DefaultTableModel)jt_CamposMod.getModel();
-        for (int i = 0; i < CamposLeido2.size(); i++) {
-            if(i%2==0){
-            Object[] row = {CamposLeido2.get(i),CamposLeido2.get(i+1)};
-            modelT.addRow(row);
+            ModCampos.pack();
+            ModCampos.show();
+            ModCampos.setVisible(true);
+            ModCampos.setEnabled(true);
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                System.out.println(CamposLeido2.get(i));
             }
+
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                if (i % 2 == 0) {
+                    Object[] row = {CamposLeido2.get(i), CamposLeido2.get(i + 1)};
+                    modelT.addRow(row);
+                }
+            }
+            CamposLeidos2.clear();
         }
-        CamposLeidos2.clear();
+
     }//GEN-LAST:event_ModificarCamposActionPerformed
 
     private void BorrarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarCamposActionPerformed
         String cadena = "";
         String cadena2 = "";
+        DefaultTableModel modelT = (DefaultTableModel) jt_CamposMod.getModel();
+
+        for (int i = (modelT.getRowCount() - 1); i >= 0; i--) {
+            modelT.removeRow(i);
+        }
         ArrayList CamposLeido2 = new ArrayList();
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
@@ -868,11 +985,11 @@ public class MaynGUI extends javax.swing.JFrame {
             //Leyendo el archivo
             BufferedReader br = null;
             FileReader fr = null;
-            try{
+            try {
                 fr = new FileReader(ArchivoActual);
                 br = new BufferedReader(fr);
                 cadena = br.readLine();
-            }catch(Exception e){
+            } catch (Exception e) {
                 System.out.println("ERROR!!ERROR!!ERROR!!");
             }
             ////////////////////////////////
@@ -882,82 +999,83 @@ public class MaynGUI extends javax.swing.JFrame {
                 cadena2 = cadena2 + ";" + tokens.nextToken();
                 System.out.println(cadena2);
             }
-        }
-        if (cadena2 != "") {
-            StringTokenizer tokens2;
-            tokens2 = new StringTokenizer(cadena2, ";");
-            while(tokens2.hasMoreTokens()){
-                CamposLeidos3.add(tokens2.nextToken());                
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos3.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos3.size(); i++) {
+                    System.out.println(CamposLeidos3.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
             }
-            for (int i = 0; i < CamposLeidos3.size(); i++) {
-                System.out.println(CamposLeidos3.get(i));
-            }
-            
-        }else{
-            System.out.println("No hay nada");
-        }
-        String palabra = "";
-        int largo = -1;
-        if(CamposLeidos3.size() != 0){
-            for (int i = 0; i < CamposLeidos3.size(); i++) {
-                if((CamposLeidos3.get(i)).charAt(0) == 'S' || (CamposLeidos3.get(i)).charAt(0) == 's'){
-                    CamposLeido2.add("String");
-                    largo = (CamposLeidos3.get(i)).length();
-                    for (int j = 7; j < largo; j++) {
-                        palabra +=(CamposLeidos3.get(i)).charAt(j);
+            String palabra = "";
+            int largo = -1;
+            if (CamposLeidos3.size() != 0) {
+                for (int i = 0; i < CamposLeidos3.size(); i++) {
+                    if ((CamposLeidos3.get(i)).charAt(0) == 'S' || (CamposLeidos3.get(i)).charAt(0) == 's') {
+                        CamposLeido2.add("String");
+                        largo = (CamposLeidos3.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos3.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos3.get(i)).charAt(0) == 'I' || (CamposLeidos3.get(i)).charAt(0) == 'i') {
+                        CamposLeido2.add("Int");
+                        largo = (CamposLeidos3.get(i)).length();
+                        for (int j = 4; j < largo; j++) {
+                            palabra += (CamposLeidos3.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos3.get(i)).charAt(0) == 'C' || (CamposLeidos3.get(i)).charAt(0) == 'c') {
+                        CamposLeido2.add("Char");
+                        largo = (CamposLeidos3.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos3.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos3.get(i)).charAt(0) == 'L' || (CamposLeidos3.get(i)).charAt(0) == 'l') {
+                        CamposLeido2.add("Long");
+                        largo = (CamposLeidos3.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos3.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos3.get(i)).charAt(0) == 'D' || (CamposLeidos3.get(i)).charAt(0) == 'd') {
+                        CamposLeido2.add("Double");
+                        largo = (CamposLeidos3.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos3.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
                     }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos3.get(i)).charAt(0) == 'I' || (CamposLeidos3.get(i)).charAt(0) == 'i'){
-                    CamposLeido2.add("Int");
-                    largo = (CamposLeidos3.get(i)).length();
-                    for (int j = 4; j < largo; j++) {
-                        palabra +=(CamposLeidos3.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos3.get(i)).charAt(0) == 'C' || (CamposLeidos3.get(i)).charAt(0) == 'c'){
-                    CamposLeido2.add("Char");
-                    largo = (CamposLeidos3.get(i)).length();
-                    for (int j = 5; j < largo; j++) {
-                        palabra +=(CamposLeidos3.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos3.get(i)).charAt(0) == 'L' || (CamposLeidos3.get(i)).charAt(0) == 'l'){
-                    CamposLeido2.add("Long");
-                    largo = (CamposLeidos3.get(i)).length();
-                    for (int j = 5; j < largo; j++) {
-                        palabra +=(CamposLeidos3.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
-                }else if((CamposLeidos3.get(i)).charAt(0) == 'D' || (CamposLeidos3.get(i)).charAt(0) == 'd'){
-                    CamposLeido2.add("Double");
-                    largo = (CamposLeidos3.get(i)).length();
-                    for (int j = 7; j < largo; j++) {
-                        palabra +=(CamposLeidos3.get(i)).charAt(j);
-                    }
-                    CamposLeido2.add(palabra);
-                    palabra="";
                 }
             }
-        }
-        BorrarCampo.pack();
-        BorrarCampo.show();
-        BorrarCampo.setVisible(true);
-        BorrarCampo.setEnabled(true);
-        for (int i = 0; i < CamposLeido2.size(); i++) {
-            System.out.println(CamposLeido2.get(i));
-        }
-        DefaultTableModel modelT = (DefaultTableModel)jt_BorrarCampos.getModel();
-        for (int i = 0; i < CamposLeido2.size(); i++) {
-            if(i%2==0){
-            Object[] row = {CamposLeido2.get(i),CamposLeido2.get(i+1)};
-            modelT.addRow(row);
+            BorrarCampo.pack();
+            BorrarCampo.show();
+            BorrarCampo.setVisible(true);
+            BorrarCampo.setEnabled(true);
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                System.out.println(CamposLeido2.get(i));
             }
+
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                if (i % 2 == 0) {
+                    Object[] row = {CamposLeido2.get(i), CamposLeido2.get(i + 1)};
+                    modelT.addRow(row);
+                }
+            }
+            CamposLeidos3.clear();
         }
-        CamposLeidos3.clear();
+
     }//GEN-LAST:event_BorrarCamposActionPerformed
 
     private void AbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirArchivoActionPerformed
@@ -973,68 +1091,540 @@ public class MaynGUI extends javax.swing.JFrame {
 
     private void jjb_ModCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jjb_ModCamposMouseClicked
         ArrayList<Campos> CamposModificados = new ArrayList();
-        DefaultTableModel modeloT = (DefaultTableModel)jt_CamposMod.getModel();
+        DefaultTableModel modeloT = (DefaultTableModel) jt_CamposMod.getModel();
         int largo = modeloT.getRowCount();
         for (int i = 0; i < largo; i++) {
-            Campos c = new Campos((modeloT.getValueAt(i, 0).toString()),(modeloT.getValueAt(i, 1).toString()));
+            Campos c = new Campos((modeloT.getValueAt(i, 0).toString()), (modeloT.getValueAt(i, 1).toString()));
             CamposModificados.add(c);
         }
         String Oracion = "";
         for (int i = 0; i < CamposModificados.size(); i++) {
             System.out.println(CamposModificados.get(i));
-            Oracion+=CamposModificados.get(i).toString();
+            Oracion += CamposModificados.get(i).toString();
         }
         CamposModificados.clear();
-            //Aqui es para guardar los cambios que se hicieron en los campos
+        //Aqui es para guardar los cambios que se hicieron en los campos
         try {
-            FileWriter fr = new FileWriter(ArchivoActual,false);
+            FileWriter fr = new FileWriter(ArchivoActual, false);
             BufferedWriter br = new BufferedWriter(fr);
             br.write(Oracion);
             br.flush();
             br.close();
             fr.close();
         } catch (IOException ex) {
-            
+
         }
-        
+        JOptionPane.showMessageDialog(this, "Se ha guardado");
+
     }//GEN-LAST:event_jjb_ModCamposMouseClicked
 
     private void jb_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_BorrarCampoMouseClicked
-        DefaultTableModel ModeloT = (DefaultTableModel)jt_BorrarCampos.getModel();
+        DefaultTableModel ModeloT = (DefaultTableModel) jt_BorrarCampos.getModel();
         int selec = jt_BorrarCampos.getSelectedRow();
-        if(selec >= 0){
+        if (selec >= 0) {
             ModeloT.removeRow(selec);
-        }else{
+            JOptionPane.showMessageDialog(this, "Se ha borrado");
+        } else {
             JOptionPane.showMessageDialog(BorrarCampo, "No hay nada seleccionado en la tabla");
         }
     }//GEN-LAST:event_jb_BorrarCampoMouseClicked
 
     private void jb_BorrandoCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_BorrandoCamposMouseClicked
         ArrayList<Campos> CamposModificados = new ArrayList();
-        DefaultTableModel modeloT = (DefaultTableModel)jt_BorrarCampos.getModel();
+        DefaultTableModel modeloT = (DefaultTableModel) jt_BorrarCampos.getModel();
         int largo = modeloT.getRowCount();
         for (int i = 0; i < largo; i++) {
-            Campos c = new Campos((modeloT.getValueAt(i, 0).toString()),(modeloT.getValueAt(i, 1).toString()));
+            Campos c = new Campos((modeloT.getValueAt(i, 0).toString()), (modeloT.getValueAt(i, 1).toString()));
             CamposModificados.add(c);
         }
         String Oracion = "";
         for (int i = 0; i < CamposModificados.size(); i++) {
             System.out.println(CamposModificados.get(i));
-            Oracion+=CamposModificados.get(i).toString();
+            Oracion += CamposModificados.get(i).toString();
         }
         CamposModificados.clear();
-            //Aqui es para guardar los cambios que se hicieron en los campos
+        //Aqui es para guardar los cambios que se hicieron en los campos
         try {
-            FileWriter fr = new FileWriter(ArchivoActual,false);
+            FileWriter fr = new FileWriter(ArchivoActual, false);
             BufferedWriter br = new BufferedWriter(fr);
             br.write(Oracion);
             br.flush();
             br.close();
             fr.close();
         } catch (IOException ex) {
-            
+            JOptionPane.showMessageDialog(this, "Se ha guardado");
         }
     }//GEN-LAST:event_jb_BorrandoCamposMouseClicked
+
+    private void IntroducirRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntroducirRegistrosActionPerformed
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            String Registro = "";
+            String cadena = "";
+            String cadena2 = "";
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+            } else {
+                System.out.println("No hay nada");
+            }
+            if (CamposLeidos.size() != 0) {
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    String Temp = "";
+                    int Numerin = 0;
+                    String caraceter = "";
+                    long largo = 0;
+                    double doble = 0;
+                    if ((CamposLeidos.get(i)).charAt(0) == 'S' || (CamposLeidos.get(i)).charAt(0) == 's') {//String
+                        Boolean length = true;
+                        while (length) {
+                            Temp = JOptionPane.showInputDialog(this, "Introduzca el campo tipo String de: *" + CamposLeidos.get(i).substring(7, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                            if (Temp.length() < 19) {
+                                length = false;
+                            } else {
+                                length = true;
+                            }
+                            // System.out.println(Temp.length());
+                        }
+                        Registro += fixedLengthString(Temp) + "|";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'I' || (CamposLeidos.get(i)).charAt(0) == 'i') {//Integer
+                        Boolean numero = true;
+                        while (numero) {
+                            try {
+                                String Temporal;
+                                Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Integer de: *" + CamposLeidos.get(i).substring(8, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                for (int j = 0; j < Temporal.length(); j++) {
+                                    if (!Character.isDigit(Temporal.charAt(i))) {
+                                        numero = true;
+                                    }
+                                }
+                                Registro += fixedLengthString((Temporal)) + "|";
+                                numero = false;
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                                numero = true;
+                            }
+                        }
+
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'C' || (CamposLeidos.get(i)).charAt(0) == 'c') {//Character
+                        Boolean length = true;
+                        String Temporal = "";
+                        while (length) {
+                            Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Character de: *" + CamposLeidos.get(i).substring(10, CamposLeidos.get(i).length()) + "* 1Caraccter porfavor");
+                            if (Temporal.length() > 1) {
+                                length = true;
+                                JOptionPane.showMessageDialog(this, "Porfavor siga las indicaciones");
+                            } else {
+                                length = false;
+                            }
+                        }
+                        Registro += fixedLengthString((Temporal)) + "|";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'L' || (CamposLeidos.get(i)).charAt(0) == 'l') {//Long
+                        Boolean numero = true;
+                        while (numero) {
+                            try {
+                                String Temporal;
+                                Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Long de: *" + CamposLeidos.get(i).substring(5, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                for (int j = 0; j < Temporal.length(); j++) {
+                                    if (!Character.isDigit(Temporal.charAt(i))) {
+                                        numero = true;
+                                    }
+                                }
+                                Registro += fixedLengthString((Temporal)) + "|";
+                                numero = false;
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                                numero = true;
+                            }
+                        }
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'D' || (CamposLeidos.get(i)).charAt(0) == 'd') {//Double
+                        Boolean numero = true;
+                        while (numero) {
+                            try {
+                                String Temporal;
+                                Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Double de: *" + CamposLeidos.get(i).substring(8, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                for (int j = 0; j < Temporal.length(); j++) {
+                                    if (!Character.isDigit(Temporal.charAt(i))) {
+                                        numero = true;
+                                    }
+                                }
+                                Registro += fixedLengthString((Temporal)) + "|";
+                                numero = false;
+                            } catch (Exception e) {
+                                JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                                numero = true;
+                            }
+                        }
+
+                    }
+                }
+            }
+            CamposLeidos.clear();
+            System.out.println(Registro);
+            BufferedReader br2 = null;
+            FileReader fr2 = null;
+            FileWriter frw = null;
+            BufferedWriter brw = null;
+            try {
+                fr2 = new FileReader(ArchivoActual);
+                br2 = new BufferedReader(fr);
+                frw = new FileWriter(ArchivoActual, true);
+                brw = new BufferedWriter(frw);
+
+                brw.newLine();
+                brw.write(Registro);
+                brw.flush();
+
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+        }//fin del else de revision de archivo
+    }//GEN-LAST:event_IntroducirRegistrosActionPerformed
+
+    private void ModificarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarRegistrosActionPerformed
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+        }
+    }//GEN-LAST:event_ModificarRegistrosActionPerformed
+
+    private void BorrarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarRegistrosActionPerformed
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+        }
+    }//GEN-LAST:event_BorrarRegistrosActionPerformed
+
+    private void ListarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarRegistrosActionPerformed
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            bt_anterio.setVisible(false);
+            Registros.pack();
+            Registros.show();
+            Registros.setVisible(true);
+            Registros.setEnabled(true);
+
+            ArrayList Records = new ArrayList();
+            BufferedReader br = null;
+            String cadena3 = "";
+            FileReader fr = null;
+            DefaultTableModel dm = new DefaultTableModel(0, 0);
+            ///////
+            String cadena = "", cadena2 = "";
+
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                //System.out.println(cadena.length());
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+                /////////////////headers
+                String header[] = CamposLeidos.toArray(new String[0]);
+                dm.setColumnIdentifiers(header);
+                jt_Registros.setModel(dm);
+                try {
+                    fr = new FileReader(ArchivoActual);
+                    br = new BufferedReader(fr);
+                } catch (FileNotFoundException ex) {
+                }
+
+                try {///LEER LOS REGISTROS
+                    String line;
+                    for (int i = contadorPagina; i < contadorPagina + 25; i++) {
+                        try (Stream<String> lines = Files.lines(Paths.get(ArchivoActual))) {
+                            String line32 = lines.skip(i).findFirst().get();
+                            if (!line32.contains(";") && !line32.equals("")) {
+                                ContadorMundial++;
+                                Records.add(line32);
+                            } else {
+                                System.out.println("ERROR CRITICO");
+                            }
+
+                            //System.out.println(line32);
+                        } catch (Exception ex) {
+                            //Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    br.close();
+                    //SRecords.remove(0);
+                } catch (IOException ex) {
+                    System.out.println("NO habia nada");
+                }
+                Vector<Object> data = new Vector<Object>();
+
+                for (int i = 0; i < Records.size(); i++) {
+                    StringTokenizer Token;
+                    Token = new StringTokenizer(Records.get(i).toString(), "|");
+                    while (Token.hasMoreTokens()) {
+                        data.add(Token.nextToken());
+                    }
+                    dm.addRow(data);
+                    // data.clear();
+                    data = new Vector<Object>();
+                }
+
+                //Construct BufferedReader from InputStreamReader
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(ArchivoActual);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                BufferedReader brPrueba = new BufferedReader(new InputStreamReader(fis));
+                //System.out.println(brPrueba.read());
+                //
+
+            }
+        }//fin de else 
+    }//GEN-LAST:event_ListarRegistrosActionPerformed
+
+    private void bt_anterioHierarchyChanged(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_bt_anterioHierarchyChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bt_anterioHierarchyChanged
+
+    private void bt_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_siguienteActionPerformed
+        
+        if (ContadorMundial < 25) {
+            System.out.println("no hay suficiente");
+        } else {
+
+            contadorPagina += 10;
+            bt_anterio.setVisible(true);
+            DefaultTableModel dm1 = (DefaultTableModel) jt_Registros.getModel();
+            dm1.getDataVector().removeAllElements();
+            dm1.fireTableDataChanged();
+            ArrayList Records = new ArrayList();
+            BufferedReader br = null;
+            String cadena3 = "";
+            FileReader fr = null;
+            CamposLeidos.clear();
+            ///////
+            String cadena = "", cadena2 = "";
+
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                //System.out.println(cadena.length());
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+                /////////////////headers
+                DefaultTableModel dm = new DefaultTableModel(0, 0);
+                String header[] = CamposLeidos.toArray(new String[0]);
+                dm.setColumnIdentifiers(header);
+                jt_Registros.setModel(dm);
+                try {
+                    fr = new FileReader(ArchivoActual);
+                    br = new BufferedReader(fr);
+                } catch (FileNotFoundException ex) {
+                }
+                try {///LEER LOS REGISTROS
+                    String line;
+                    for (int i = contadorPagina; i < contadorPagina + 25; i++) {
+                        try (Stream<String> lines = Files.lines(Paths.get(ArchivoActual))) {
+                            String line32 = lines.skip(i).findFirst().get();
+                            if (line32.contains("*") || line32.equals("")) {
+                                //no lo añader
+                            } else {
+                                Records.add(line32);
+                            }
+
+                            //System.out.println(line32);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    br.close();
+                    //SRecords.remove(0);
+                } catch (IOException ex) {
+                    System.out.println("NO habia nada");
+                }
+                Vector<Object> data = new Vector<Object>();
+
+                for (int i = 0; i < Records.size(); i++) {
+                    StringTokenizer Token;
+                    Token = new StringTokenizer(Records.get(i).toString(), "|");
+                    while (Token.hasMoreTokens()) {
+                        data.add(Token.nextToken());
+                    }
+                    dm.addRow(data);
+                    // data.clear();
+                    data = new Vector<Object>();
+                }
+
+                //Construct BufferedReader from InputStreamReader
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(ArchivoActual);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                BufferedReader brPrueba = new BufferedReader(new InputStreamReader(fis));
+                //System.out.println(brPrueba.read());
+                //
+
+            }
+        }
+    }//GEN-LAST:event_bt_siguienteActionPerformed
+
+    private void bt_anterioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_anterioActionPerformed
+        if (contadorPagina < 10) {
+            System.out.println("No hay mas registros atras");
+        } else {
+            contadorPagina -= 10;
+            DefaultTableModel dm1 = (DefaultTableModel) jt_Registros.getModel();
+            dm1.getDataVector().removeAllElements();
+            dm1.fireTableDataChanged();
+            ArrayList Records = new ArrayList();
+            BufferedReader br = null;
+            String cadena3 = "";
+            FileReader fr = null;
+            CamposLeidos.clear();
+            ///////
+            String cadena = "", cadena2 = "";
+
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                //System.out.println(cadena.length());
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+                /////////////////headers
+                DefaultTableModel dm = new DefaultTableModel(0, 0);
+                String header[] = CamposLeidos.toArray(new String[0]);
+                dm.setColumnIdentifiers(header);
+                jt_Registros.setModel(dm);
+                try {
+                    fr = new FileReader(ArchivoActual);
+                    br = new BufferedReader(fr);
+                } catch (FileNotFoundException ex) {
+                }
+                try {///LEER LOS REGISTROS
+                    String line;
+                    for (int i = contadorPagina; i < contadorPagina + 25; i++) {
+                        try (Stream<String> lines = Files.lines(Paths.get(ArchivoActual))) {
+                            String line32 = lines.skip(i).findFirst().get();
+                            if (line32.contains("*") || line32.equals("")) {
+                                //no lo añader
+                            } else {
+                                Records.add(line32);
+                            }
+
+                            //System.out.println(line32);
+                        } catch (IOException ex) {
+                            Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    br.close();
+                    //SRecords.remove(0);
+                } catch (IOException ex) {
+                    System.out.println("NO habia nada");
+                }
+                Vector<Object> data = new Vector<Object>();
+
+                for (int i = 0; i < Records.size(); i++) {
+                    StringTokenizer Token;
+                    Token = new StringTokenizer(Records.get(i).toString(), "|");
+                    while (Token.hasMoreTokens()) {
+                        data.add(Token.nextToken());
+                    }
+                    dm.addRow(data);
+                    // data.clear();
+                    data = new Vector<Object>();
+                }
+
+                //Construct BufferedReader from InputStreamReader
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(ArchivoActual);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                BufferedReader brPrueba = new BufferedReader(new InputStreamReader(fis));
+                //System.out.println(brPrueba.read());
+                //
+
+            }
+        }
+
+    }//GEN-LAST:event_bt_anterioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1078,7 +1668,6 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem BorrarCampos;
     private javax.swing.JMenuItem BorrarRegistros;
     private javax.swing.JMenuItem BuscarRegistros;
-    private javax.swing.JMenuItem CargarPrueba;
     private javax.swing.JMenuItem CerrarArchivo;
     private javax.swing.JMenuItem CrearCampos;
     private javax.swing.JMenuItem CrearIndice;
@@ -1094,8 +1683,11 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem ModificarRegistros;
     private javax.swing.JMenuItem Nuevo;
     private javax.swing.JMenuItem ReIndexarArchviso;
+    private javax.swing.JDialog Registros;
     private javax.swing.JMenuItem Salvar;
     private javax.swing.JDialog TablaCampos;
+    private javax.swing.JButton bt_anterio;
+    private javax.swing.JButton bt_siguiente;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
@@ -1107,10 +1699,12 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JButton jb_AgregarCampo;
     private javax.swing.JButton jb_BorrandoCampos;
     private javax.swing.JButton jb_BorrarCampo;
@@ -1121,8 +1715,12 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JTable jt_BorrarCampos;
     private javax.swing.JTable jt_Campos;
     private javax.swing.JTable jt_CamposMod;
+    private javax.swing.JTable jt_Registros;
     // End of variables declaration//GEN-END:variables
-   String ArchivoActual;
+   public static String fixedLengthString(String string) {
+        return String.format("%1$-" + (19) + "s", string);
+    }
+    String ArchivoActual;
     String TipoCampo = "";
     int contador = 0;
     String NombreCampo = "";
@@ -1132,4 +1730,6 @@ public class MaynGUI extends javax.swing.JFrame {
     ArrayList<String> CamposLeidos = new ArrayList();
     ArrayList<String> CamposLeidos2 = new ArrayList();
     ArrayList<String> CamposLeidos3 = new ArrayList();
+    int contadorPagina = 0;
+    int ContadorMundial=0;
 }
