@@ -722,10 +722,15 @@ public class MaynGUI extends javax.swing.JFrame {
             FileWriter fw = null;
             BufferedWriter bw = null;
             try {
+                fw = new FileWriter(ArchivoActual, true);
+            } catch (IOException ex) {
+                Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            bw = new BufferedWriter(fw);
+            try {
                 for (int i = 0; i < Modelo.getSize(); i++) {
                     Campos CL = (Campos) Modelo.get(i);
-                    fw = new FileWriter(ArchivoActual, true);
-                    bw = new BufferedWriter(fw);
+
                     bw.write(CL.toString());
 
                 }

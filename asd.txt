@@ -1,1 +1,1 @@
-Int|Num;Int|ID;String|Nom;SiPorfavor|Sexo;
+String|Nombre;String|Sexualidad;
