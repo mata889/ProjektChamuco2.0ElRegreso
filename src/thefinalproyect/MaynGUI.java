@@ -27,6 +27,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -58,6 +59,21 @@ public class MaynGUI extends javax.swing.JFrame {
         jb_AgregarCampo = new javax.swing.JButton();
         jb_LlavePrimaria = new javax.swing.JButton();
         jb_GuardarC = new javax.swing.JButton();
+        TablaCampos = new javax.swing.JDialog();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jt_Campos = new javax.swing.JTable();
+        ModCampos = new javax.swing.JDialog();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jt_CamposMod = new javax.swing.JTable();
+        jjb_ModCampos = new javax.swing.JButton();
+        BorrarCampo = new javax.swing.JDialog();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jt_BorrarCampos = new javax.swing.JTable();
+        jb_BorrarCampo = new javax.swing.JButton();
+        jb_BorrandoCampos = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -171,6 +187,194 @@ public class MaynGUI extends javax.swing.JFrame {
         AgregarCamposLayout.setVerticalGroup(
             AgregarCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        TablaCampos.setTitle("Campos Leidos del Archivo");
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos leidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_Campos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "TipoTdel campo", "Nombre del campo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jt_Campos);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 324, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout TablaCamposLayout = new javax.swing.GroupLayout(TablaCampos.getContentPane());
+        TablaCampos.getContentPane().setLayout(TablaCamposLayout);
+        TablaCamposLayout.setHorizontalGroup(
+            TablaCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        TablaCamposLayout.setVerticalGroup(
+            TablaCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        ModCampos.setTitle("Modificacion de campos");
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_CamposMod.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo del campo", "Nombre del campo"
+            }
+        ));
+        jScrollPane3.setViewportView(jt_CamposMod);
+
+        jjb_ModCampos.setText("Guardar Modificaciones");
+        jjb_ModCampos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jjb_ModCamposMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(jjb_ModCampos)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jjb_ModCampos))
+        );
+
+        javax.swing.GroupLayout ModCamposLayout = new javax.swing.GroupLayout(ModCampos.getContentPane());
+        ModCampos.getContentPane().setLayout(ModCamposLayout);
+        ModCamposLayout.setHorizontalGroup(
+            ModCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        ModCamposLayout.setVerticalGroup(
+            ModCamposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        BorrarCampo.setTitle("Borrar Campos");
+
+        jPanel5.setBackground(new java.awt.Color(255, 255, 255));
+
+        jt_BorrarCampos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo de Campo", "Nombre del campo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane4.setViewportView(jt_BorrarCampos);
+
+        jb_BorrarCampo.setText("Borrar Campo");
+        jb_BorrarCampo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_BorrarCampoMouseClicked(evt);
+            }
+        });
+
+        jb_BorrandoCampos.setText("Guardar Campo");
+        jb_BorrandoCampos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_BorrandoCamposMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jb_BorrarCampo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jb_BorrandoCampos)
+                .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jb_BorrarCampo)
+                    .addComponent(jb_BorrandoCampos)))
+        );
+
+        javax.swing.GroupLayout BorrarCampoLayout = new javax.swing.GroupLayout(BorrarCampo.getContentPane());
+        BorrarCampo.getContentPane().setLayout(BorrarCampoLayout);
+        BorrarCampoLayout.setHorizontalGroup(
+            BorrarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        BorrarCampoLayout.setVerticalGroup(
+            BorrarCampoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -363,43 +567,131 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_CrearIndiceActionPerformed
 
     private void ListarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCamposActionPerformed
+        String cadena = "";
+        String cadena2 = "";
+        ArrayList CamposLeido2 = new ArrayList();
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
+            //Leyendo el archivo
+            BufferedReader br = null;
+            FileReader fr = null;
+            try{
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            }catch(Exception e){
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
             StringTokenizer tokens;
-            StringTokenizer tokens2;
-            String cadena = "";
-            String cadena2 = "";
-            tokens = new StringTokenizer(cadena, "|");
-            tokens2 = new StringTokenizer(cadena, ";git statuis");
+            tokens = new StringTokenizer(cadena, ";");
             while (tokens.hasMoreTokens()) {
-                cadena2 = cadena2 + ": " + tokens.nextToken();
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
             }
         }
+        if (cadena2 != "") {
+            StringTokenizer tokens2;
+            tokens2 = new StringTokenizer(cadena2, ";");
+            while(tokens2.hasMoreTokens()){
+                CamposLeidos.add(tokens2.nextToken());                
+            }
+            for (int i = 0; i < CamposLeidos.size(); i++) {
+                System.out.println(CamposLeidos.get(i));
+            }
+            
+        }else{
+            System.out.println("No hay nada");
+        }
+        String palabra = "";
+        int largo = -1;
+        if(CamposLeidos.size() != 0){
+            for (int i = 0; i < CamposLeidos.size(); i++) {
+                if((CamposLeidos.get(i)).charAt(0) == 'S' || (CamposLeidos.get(i)).charAt(0) == 's'){
+                    CamposLeido2.add("String");
+                    largo = (CamposLeidos.get(i)).length();
+                    for (int j = 7; j < largo; j++) {
+                        palabra +=(CamposLeidos.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos.get(i)).charAt(0) == 'I' || (CamposLeidos.get(i)).charAt(0) == 'i'){
+                    CamposLeido2.add("Int");
+                    largo = (CamposLeidos.get(i)).length();
+                    for (int j = 4; j < largo; j++) {
+                        palabra +=(CamposLeidos.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos.get(i)).charAt(0) == 'C' || (CamposLeidos.get(i)).charAt(0) == 'c'){
+                    CamposLeido2.add("Char");
+                    largo = (CamposLeidos.get(i)).length();
+                    for (int j = 5; j < largo; j++) {
+                        palabra +=(CamposLeidos.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos.get(i)).charAt(0) == 'L' || (CamposLeidos.get(i)).charAt(0) == 'l'){
+                    CamposLeido2.add("Long");
+                    largo = (CamposLeidos.get(i)).length();
+                    for (int j = 5; j < largo; j++) {
+                        palabra +=(CamposLeidos.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos.get(i)).charAt(0) == 'D' || (CamposLeidos.get(i)).charAt(0) == 'd'){
+                    CamposLeido2.add("Double");
+                    largo = (CamposLeidos.get(i)).length();
+                    for (int j = 7; j < largo; j++) {
+                        palabra +=(CamposLeidos.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }
+            }
+        }
+        TablaCampos.pack();
+        TablaCampos.show();
+        TablaCampos.setVisible(true);
+        TablaCampos.setEnabled(true);
+        for (int i = 0; i < CamposLeido2.size(); i++) {
+            System.out.println(CamposLeido2.get(i));
+        }
+        DefaultTableModel modelT = (DefaultTableModel)jt_Campos.getModel();
+        for (int i = 0; i < CamposLeido2.size(); i++) {
+            if(i%2==0){
+            Object[] row = {CamposLeido2.get(i),CamposLeido2.get(i+1)};
+            modelT.addRow(row);
+            }
+        }
+        CamposLeidos.clear();
     }//GEN-LAST:event_ListarCamposActionPerformed
 
     private void CrearCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCamposActionPerformed
-        BufferedReader br=null;
+        BufferedReader br = null;
         try {
-            br=new BufferedReader(new FileReader(ArchivoActual));
-            
+            br = new BufferedReader(new FileReader(ArchivoActual));
+
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
 
-        } else try {
-            if (br.readLine()!=null) {
-                JOptionPane.showMessageDialog(this, "Ya existe Los Campos");
-            } else {
-                AgregarCampos.pack();
-                AgregarCampos.show();
-                AgregarCampos.setVisible(true);
-                AgregarCampos.setEnabled(true);
+        } else {
+            try {
+                if (br.readLine() != null) {
+                    JOptionPane.showMessageDialog(this, "Ya existe Los Campos");
+                } else {
+                    AgregarCampos.pack();
+                    AgregarCampos.show();
+                    AgregarCampos.setVisible(true);
+                    AgregarCampos.setEnabled(true);
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (IOException ex) {
-            Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_CrearCamposActionPerformed
@@ -460,15 +752,207 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ExitActionPerformed
 
     private void ModificarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarCamposActionPerformed
+        String cadena = "";
+        String cadena2 = "";
+        ArrayList CamposLeido2 = new ArrayList();
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            //Leyendo el archivo
+            BufferedReader br = null;
+            FileReader fr = null;
+            try{
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            }catch(Exception e){
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
         }
+        if (cadena2 != "") {
+            StringTokenizer tokens2;
+            tokens2 = new StringTokenizer(cadena2, ";");
+            while(tokens2.hasMoreTokens()){
+                CamposLeidos2.add(tokens2.nextToken());                
+            }
+            for (int i = 0; i < CamposLeidos2.size(); i++) {
+                System.out.println(CamposLeidos2.get(i));
+            }
+            
+        }else{
+            System.out.println("No hay nada");
+        }
+        String palabra = "";
+        int largo = -1;
+        if(CamposLeidos2.size() != 0){
+            for (int i = 0; i < CamposLeidos2.size(); i++) {
+                if((CamposLeidos2.get(i)).charAt(0) == 'S' || (CamposLeidos2.get(i)).charAt(0) == 's'){
+                    CamposLeido2.add("String");
+                    largo = (CamposLeidos2.get(i)).length();
+                    for (int j = 7; j < largo; j++) {
+                        palabra +=(CamposLeidos2.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos2.get(i)).charAt(0) == 'I' || (CamposLeidos2.get(i)).charAt(0) == 'i'){
+                    CamposLeido2.add("Int");
+                    largo = (CamposLeidos2.get(i)).length();
+                    for (int j = 4; j < largo; j++) {
+                        palabra +=(CamposLeidos2.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos2.get(i)).charAt(0) == 'C' || (CamposLeidos2.get(i)).charAt(0) == 'c'){
+                    CamposLeido2.add("Char");
+                    largo = (CamposLeidos2.get(i)).length();
+                    for (int j = 5; j < largo; j++) {
+                        palabra +=(CamposLeidos2.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos2.get(i)).charAt(0) == 'L' || (CamposLeidos2.get(i)).charAt(0) == 'l'){
+                    CamposLeido2.add("Long");
+                    largo = (CamposLeidos2.get(i)).length();
+                    for (int j = 5; j < largo; j++) {
+                        palabra +=(CamposLeidos2.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos2.get(i)).charAt(0) == 'D' || (CamposLeidos2.get(i)).charAt(0) == 'd'){
+                    CamposLeido2.add("Double");
+                    largo = (CamposLeidos2.get(i)).length();
+                    for (int j = 7; j < largo; j++) {
+                        palabra +=(CamposLeidos2.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }
+            }
+        }
+        ModCampos.pack();
+        ModCampos.show();
+        ModCampos.setVisible(true);
+        ModCampos.setEnabled(true);
+        for (int i = 0; i < CamposLeido2.size(); i++) {
+            System.out.println(CamposLeido2.get(i));
+        }
+        DefaultTableModel modelT = (DefaultTableModel)jt_CamposMod.getModel();
+        for (int i = 0; i < CamposLeido2.size(); i++) {
+            if(i%2==0){
+            Object[] row = {CamposLeido2.get(i),CamposLeido2.get(i+1)};
+            modelT.addRow(row);
+            }
+        }
+        CamposLeidos2.clear();
     }//GEN-LAST:event_ModificarCamposActionPerformed
 
     private void BorrarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarCamposActionPerformed
+        String cadena = "";
+        String cadena2 = "";
+        ArrayList CamposLeido2 = new ArrayList();
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            //Leyendo el archivo
+            BufferedReader br = null;
+            FileReader fr = null;
+            try{
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            }catch(Exception e){
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
         }
+        if (cadena2 != "") {
+            StringTokenizer tokens2;
+            tokens2 = new StringTokenizer(cadena2, ";");
+            while(tokens2.hasMoreTokens()){
+                CamposLeidos3.add(tokens2.nextToken());                
+            }
+            for (int i = 0; i < CamposLeidos3.size(); i++) {
+                System.out.println(CamposLeidos3.get(i));
+            }
+            
+        }else{
+            System.out.println("No hay nada");
+        }
+        String palabra = "";
+        int largo = -1;
+        if(CamposLeidos3.size() != 0){
+            for (int i = 0; i < CamposLeidos3.size(); i++) {
+                if((CamposLeidos3.get(i)).charAt(0) == 'S' || (CamposLeidos3.get(i)).charAt(0) == 's'){
+                    CamposLeido2.add("String");
+                    largo = (CamposLeidos3.get(i)).length();
+                    for (int j = 7; j < largo; j++) {
+                        palabra +=(CamposLeidos3.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos3.get(i)).charAt(0) == 'I' || (CamposLeidos3.get(i)).charAt(0) == 'i'){
+                    CamposLeido2.add("Int");
+                    largo = (CamposLeidos3.get(i)).length();
+                    for (int j = 4; j < largo; j++) {
+                        palabra +=(CamposLeidos3.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos3.get(i)).charAt(0) == 'C' || (CamposLeidos3.get(i)).charAt(0) == 'c'){
+                    CamposLeido2.add("Char");
+                    largo = (CamposLeidos3.get(i)).length();
+                    for (int j = 5; j < largo; j++) {
+                        palabra +=(CamposLeidos3.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos3.get(i)).charAt(0) == 'L' || (CamposLeidos3.get(i)).charAt(0) == 'l'){
+                    CamposLeido2.add("Long");
+                    largo = (CamposLeidos3.get(i)).length();
+                    for (int j = 5; j < largo; j++) {
+                        palabra +=(CamposLeidos3.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }else if((CamposLeidos3.get(i)).charAt(0) == 'D' || (CamposLeidos3.get(i)).charAt(0) == 'd'){
+                    CamposLeido2.add("Double");
+                    largo = (CamposLeidos3.get(i)).length();
+                    for (int j = 7; j < largo; j++) {
+                        palabra +=(CamposLeidos3.get(i)).charAt(j);
+                    }
+                    CamposLeido2.add(palabra);
+                    palabra="";
+                }
+            }
+        }
+        BorrarCampo.pack();
+        BorrarCampo.show();
+        BorrarCampo.setVisible(true);
+        BorrarCampo.setEnabled(true);
+        for (int i = 0; i < CamposLeido2.size(); i++) {
+            System.out.println(CamposLeido2.get(i));
+        }
+        DefaultTableModel modelT = (DefaultTableModel)jt_BorrarCampos.getModel();
+        for (int i = 0; i < CamposLeido2.size(); i++) {
+            if(i%2==0){
+            Object[] row = {CamposLeido2.get(i),CamposLeido2.get(i+1)};
+            modelT.addRow(row);
+            }
+        }
+        CamposLeidos3.clear();
     }//GEN-LAST:event_BorrarCamposActionPerformed
 
     private void AbrirArchivoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AbrirArchivoActionPerformed
@@ -481,6 +965,71 @@ public class MaynGUI extends javax.swing.JFrame {
             ArchivoActual = fileChooser.getSelectedFile().getAbsolutePath();
         }
     }//GEN-LAST:event_AbrirArchivoActionPerformed
+
+    private void jjb_ModCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jjb_ModCamposMouseClicked
+        ArrayList<Campos> CamposModificados = new ArrayList();
+        DefaultTableModel modeloT = (DefaultTableModel)jt_CamposMod.getModel();
+        int largo = modeloT.getRowCount();
+        for (int i = 0; i < largo; i++) {
+            Campos c = new Campos((modeloT.getValueAt(i, 0).toString()),(modeloT.getValueAt(i, 1).toString()));
+            CamposModificados.add(c);
+        }
+        String Oracion = "";
+        for (int i = 0; i < CamposModificados.size(); i++) {
+            System.out.println(CamposModificados.get(i));
+            Oracion+=CamposModificados.get(i).toString();
+        }
+        CamposModificados.clear();
+            //Aqui es para guardar los cambios que se hicieron en los campos
+        try {
+            FileWriter fr = new FileWriter(ArchivoActual,false);
+            BufferedWriter br = new BufferedWriter(fr);
+            br.write(Oracion);
+            br.flush();
+            br.close();
+            fr.close();
+        } catch (IOException ex) {
+            
+        }
+        
+    }//GEN-LAST:event_jjb_ModCamposMouseClicked
+
+    private void jb_BorrarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_BorrarCampoMouseClicked
+        DefaultTableModel ModeloT = (DefaultTableModel)jt_BorrarCampos.getModel();
+        int selec = jt_BorrarCampos.getSelectedRow();
+        if(selec >= 0){
+            ModeloT.removeRow(selec);
+        }else{
+            JOptionPane.showMessageDialog(BorrarCampo, "No hay nada seleccionado en la tabla");
+        }
+    }//GEN-LAST:event_jb_BorrarCampoMouseClicked
+
+    private void jb_BorrandoCamposMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_BorrandoCamposMouseClicked
+        ArrayList<Campos> CamposModificados = new ArrayList();
+        DefaultTableModel modeloT = (DefaultTableModel)jt_BorrarCampos.getModel();
+        int largo = modeloT.getRowCount();
+        for (int i = 0; i < largo; i++) {
+            Campos c = new Campos((modeloT.getValueAt(i, 0).toString()),(modeloT.getValueAt(i, 1).toString()));
+            CamposModificados.add(c);
+        }
+        String Oracion = "";
+        for (int i = 0; i < CamposModificados.size(); i++) {
+            System.out.println(CamposModificados.get(i));
+            Oracion+=CamposModificados.get(i).toString();
+        }
+        CamposModificados.clear();
+            //Aqui es para guardar los cambios que se hicieron en los campos
+        try {
+            FileWriter fr = new FileWriter(ArchivoActual,false);
+            BufferedWriter br = new BufferedWriter(fr);
+            br.write(Oracion);
+            br.flush();
+            br.close();
+            fr.close();
+        } catch (IOException ex) {
+            
+        }
+    }//GEN-LAST:event_jb_BorrandoCamposMouseClicked
 
     /**
      * @param args the command line arguments
@@ -520,6 +1069,7 @@ public class MaynGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AbrirArchivo;
     private javax.swing.JDialog AgregarCampos;
+    private javax.swing.JDialog BorrarCampo;
     private javax.swing.JMenuItem BorrarCampos;
     private javax.swing.JMenuItem BorrarRegistros;
     private javax.swing.JMenuItem BuscarRegistros;
@@ -534,24 +1084,38 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem IntroducirRegistros;
     private javax.swing.JMenuItem ListarCampos;
     private javax.swing.JMenuItem ListarRegistros;
+    private javax.swing.JDialog ModCampos;
     private javax.swing.JMenuItem ModificarCampos;
     private javax.swing.JMenuItem ModificarRegistros;
     private javax.swing.JMenuItem Nuevo;
     private javax.swing.JMenuItem ReIndexarArchviso;
     private javax.swing.JMenuItem Salvar;
+    private javax.swing.JDialog TablaCampos;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JButton jb_AgregarCampo;
+    private javax.swing.JButton jb_BorrandoCampos;
+    private javax.swing.JButton jb_BorrarCampo;
     private javax.swing.JButton jb_GuardarC;
     private javax.swing.JButton jb_LlavePrimaria;
+    private javax.swing.JButton jjb_ModCampos;
     private javax.swing.JList<Campos> jl_Campos;
+    private javax.swing.JTable jt_BorrarCampos;
+    private javax.swing.JTable jt_Campos;
+    private javax.swing.JTable jt_CamposMod;
     // End of variables declaration//GEN-END:variables
    String ArchivoActual;
     String TipoCampo = "";
@@ -560,5 +1124,7 @@ public class MaynGUI extends javax.swing.JFrame {
     ArrayList<Campos> CamposDArchivo = new ArrayList();
     int Cantidad = 0;
     Campos c;
-
+    ArrayList<String> CamposLeidos = new ArrayList();
+    ArrayList<String> CamposLeidos2 = new ArrayList();
+    ArrayList<String> CamposLeidos3 = new ArrayList();
 }
