@@ -86,6 +86,24 @@ public class MaynGUI extends javax.swing.JFrame {
         jt_Registros = new javax.swing.JTable();
         bt_siguiente = new javax.swing.JButton();
         bt_anterio = new javax.swing.JButton();
+        CambiarExcel = new javax.swing.JDialog();
+        jPanel7 = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jt_Registros2 = new javax.swing.JTable();
+        jb_AExcel = new javax.swing.JButton();
+        Fusion = new javax.swing.JDialog();
+        jPanel8 = new javax.swing.JPanel();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jt_CamposF2 = new javax.swing.JTable();
+        jPanel9 = new javax.swing.JPanel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jt_CamposF1 = new javax.swing.JTable();
+        jPanel10 = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jt_CamposFN = new javax.swing.JTable();
+        jb_GuardarTodo = new javax.swing.JButton();
+        jb_CampoT2 = new javax.swing.JButton();
+        jb_CampoT1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu2 = new javax.swing.JMenu();
         Nuevo = new javax.swing.JMenuItem();
@@ -461,6 +479,247 @@ public class MaynGUI extends javax.swing.JFrame {
 
         jPanel6.getAccessibleContext().setAccessibleName("ModificarRegistros");
 
+        jPanel7.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros Actuales", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_Registros2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane6.setViewportView(jt_Registros2);
+
+        jb_AExcel.setText("Pasar a excel");
+        jb_AExcel.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_AExcelMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(165, 165, 165)
+                .addComponent(jb_AExcel)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jb_AExcel)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout CambiarExcelLayout = new javax.swing.GroupLayout(CambiarExcel.getContentPane());
+        CambiarExcel.getContentPane().setLayout(CambiarExcelLayout);
+        CambiarExcelLayout.setHorizontalGroup(
+            CambiarExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        CambiarExcelLayout.setVerticalGroup(
+            CambiarExcelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        jPanel8.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos del archivo 2", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_CamposF2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo de variable", "Nombre de variable"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane7.setViewportView(jt_CamposF2);
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 342, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 11, Short.MAX_VALUE))
+        );
+
+        jPanel9.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos de archivo 1", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_CamposF1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo de variable", "Nombre de variabñe"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane8.setViewportView(jt_CamposF1);
+
+        javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
+        jPanel9.setLayout(jPanel9Layout);
+        jPanel9Layout.setHorizontalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(271, 271, 271))
+        );
+        jPanel9Layout.setVerticalGroup(
+            jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPanel10.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel10.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Campos del nuevo archivo", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+
+        jt_CamposFN.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Tipo del Campo", "Nombre del Campo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane9.setViewportView(jt_CamposFN);
+
+        javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
+        jPanel10.setLayout(jPanel10Layout);
+        jPanel10Layout.setHorizontalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel10Layout.setVerticalGroup(
+            jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel10Layout.createSequentialGroup()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        jb_GuardarTodo.setText("Guardar nuevos campos");
+        jb_GuardarTodo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_GuardarTodoMouseClicked(evt);
+            }
+        });
+
+        jb_CampoT2.setText("Tomar campo del archivo 2");
+        jb_CampoT2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_CampoT2MouseClicked(evt);
+            }
+        });
+
+        jb_CampoT1.setText("Tomar campo del archivo 1");
+        jb_CampoT1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jb_CampoT1MouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout FusionLayout = new javax.swing.GroupLayout(Fusion.getContentPane());
+        Fusion.getContentPane().setLayout(FusionLayout);
+        FusionLayout.setHorizontalGroup(
+            FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FusionLayout.createSequentialGroup()
+                .addGroup(FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_CampoT1)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_CampoT2)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jb_GuardarTodo)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        FusionLayout.setVerticalGroup(
+            FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FusionLayout.createSequentialGroup()
+                .addGroup(FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(FusionLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jb_CampoT1)
+                        .addComponent(jb_CampoT2))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FusionLayout.createSequentialGroup()
+                        .addComponent(jb_GuardarTodo)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jMenu2.setText("Archivo");
@@ -591,6 +850,11 @@ public class MaynGUI extends javax.swing.JFrame {
         jMenu3.add(BorrarRegistros);
 
         CruzarArchivos.setText("Cruzar Archivos");
+        CruzarArchivos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CruzarArchivosActionPerformed(evt);
+            }
+        });
         jMenu3.add(CruzarArchivos);
 
         jMenuBar1.add(jMenu3);
@@ -610,6 +874,11 @@ public class MaynGUI extends javax.swing.JFrame {
         jMenu5.setText("Utilidades");
 
         ExportarExcel.setText("Exportar Excel");
+        ExportarExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ExportarExcelActionPerformed(evt);
+            }
+        });
         jMenu5.add(ExportarExcel);
 
         ExportarXML.setText("Exportar XML");
@@ -2175,6 +2444,421 @@ public class MaynGUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_BuscarRegistrosActionPerformed
 
+    private void ExportarExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ExportarExcelActionPerformed
+        //Mata necesito que aqui reinicies la tabla------------------------------------------------------------------------------
+        CamposLeidos.clear();
+        contadorPagina = 0;
+        ContadorMundial = 0;
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            CambiarExcel.pack();
+            CambiarExcel.show();
+            CambiarExcel.setVisible(true);
+            CambiarExcel.setEnabled(true);
+
+            ArrayList Records = new ArrayList();
+            BufferedReader br = null;
+            String cadena3 = "";
+            FileReader fr = null;
+            DefaultTableModel dm = new DefaultTableModel(0, 0);
+            ///////
+            String cadena = "", cadena2 = "";
+
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                //System.out.println(cadena.length());
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+                /////////////////headers
+                String header[] = CamposLeidos.toArray(new String[0]);
+                dm.setColumnIdentifiers(header);
+                jt_Registros2.setModel(dm);
+                try {
+                    fr = new FileReader(ArchivoActual);
+                    br = new BufferedReader(fr);
+                } catch (FileNotFoundException ex) {
+                }
+
+                try {///LEER LOS REGISTROS
+                    String line;
+                    for (int i = contadorPagina; i < contadorPagina + 25; i++) {
+                        try (Stream<String> lines = Files.lines(Paths.get(ArchivoActual.toString()))) {
+                            String line32 = lines.skip(i).findFirst().get();
+                            if (!line32.contains(";") && !line32.equals("")) {
+                                ContadorMundial++;
+                                Records.add(line32);
+                            } else {
+                                System.out.println("ERROR CRITICO");
+                            }
+
+                            //System.out.println(line32);
+                        } catch (Exception ex) {
+                            //Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                    br.close();
+                    //SRecords.remove(0);
+                } catch (IOException ex) {
+                    System.out.println("NO habia nada");
+                }
+                Vector<Object> data = new Vector<Object>();
+
+                for (int i = 0; i < Records.size(); i++) {
+                    StringTokenizer Token;
+                    Token = new StringTokenizer(Records.get(i).toString(), "|");
+                    while (Token.hasMoreTokens()) {
+                        data.add(Token.nextToken());
+                    }
+                    dm.addRow(data);
+                    // data.clear();
+                    data = new Vector<Object>();
+                }
+
+                //Construct BufferedReader from InputStreamReader
+                FileInputStream fis = null;
+                try {
+                    fis = new FileInputStream(ArchivoActual);
+                } catch (FileNotFoundException ex) {
+
+                }
+                BufferedReader brPrueba = new BufferedReader(new InputStreamReader(fis));
+                //System.out.println(brPrueba.read());
+                //
+
+            }
+        }//fin de else
+        
+        
+    }//GEN-LAST:event_ExportarExcelActionPerformed
+
+    private void jb_AExcelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AExcelMouseClicked
+        JFileChooser fc = new JFileChooser();
+        int option = fc.showSaveDialog(this);
+        if (option == JFileChooser.APPROVE_OPTION) {
+            String filename = fc.getSelectedFile().getName();
+            String path = fc.getSelectedFile().getParentFile().getPath();
+
+            int len = filename.length();
+            String ext = "";
+            String file = "";
+
+            if (len > 4) {
+                ext = filename.substring(len - 4, len);
+            }
+
+            if (ext.equals(".xls")) {
+                file = path + "\\" + filename;
+            } else {
+                file = path + "\\" + filename + ".xls";
+            }
+
+            try {
+                DefaultTableModel model = (DefaultTableModel) jt_Registros2.getModel();
+                FileWriter exel = new FileWriter(file);
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    exel.write(model.getColumnName(i) + "\t");
+                }
+                exel.write("\n");
+                for (int i = 0; i < model.getRowCount(); i++) {
+                    for (int j = 0; j < model.getColumnCount(); j++) {
+                        exel.write(model.getValueAt(i, j).toString() + "\t");
+                        System.out.println("Escribi:" + i + ":" + j);
+                    }
+                    System.out.println("Nueva linea");
+                    exel.write("\n");
+                }
+                exel.close();
+            } catch (IOException ex) {
+                Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_jb_AExcelMouseClicked
+
+    private void CruzarArchivosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CruzarArchivosActionPerformed
+        File ArchivoActual2 = null;
+        JFileChooser fileChooser = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("TEXT FILES", "txt", "text");
+        fileChooser.setFileFilter(filter);
+        int returnValue = fileChooser.showOpenDialog(null);
+        if (returnValue == JFileChooser.APPROVE_OPTION) {
+            ArchivoActual2 = fileChooser.getSelectedFile();
+        }
+        CamposLeidos.clear();
+        CamposLeidos2.clear();
+        String cadena = "";
+        String cadena2 = "";
+        ArrayList CamposLeido2 = new ArrayList();
+        DefaultTableModel modelT = (DefaultTableModel) jt_CamposF1.getModel();
+        DefaultTableModel modelT2 = (DefaultTableModel) jt_CamposF2.getModel();
+        for (int i = (modelT.getRowCount() - 1); i >= 0; i--) {
+            modelT.removeRow(i);
+        }
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo1");
+        } else {
+            //Leyendo el archivo
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            String palabra = "";
+            int largo = -1;
+            if (CamposLeidos.size() != 0) {
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    if ((CamposLeidos.get(i)).charAt(0) == 'S' || (CamposLeidos.get(i)).charAt(0) == 's') {
+                        CamposLeido2.add("String");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'I' || (CamposLeidos.get(i)).charAt(0) == 'i') {
+                        CamposLeido2.add("Int");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 4; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'C' || (CamposLeidos.get(i)).charAt(0) == 'c') {
+                        CamposLeido2.add("Char");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'L' || (CamposLeidos.get(i)).charAt(0) == 'l') {
+                        CamposLeido2.add("Long");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    } else if ((CamposLeidos.get(i)).charAt(0) == 'D' || (CamposLeidos.get(i)).charAt(0) == 'd') {
+                        CamposLeido2.add("Double");
+                        largo = (CamposLeidos.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra += (CamposLeidos.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra);
+                        palabra = "";
+                    }
+                }
+            }
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                System.out.println(CamposLeido2.get(i));
+            }
+
+            for (int i = 0; i < CamposLeido2.size(); i++) {
+                if (i % 2 == 0) {
+                    Object[] row = {CamposLeido2.get(i), CamposLeido2.get(i + 1)};
+                    modelT.addRow(row);
+                }
+            }
+        }
+        CamposLeido2.clear();
+        ArrayList CamposLeido3 = new ArrayList();
+        if (ArchivoActual2 == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo2");
+        } else {
+            //Leyendo el archivo
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual2);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens3;
+            tokens3 = new StringTokenizer(cadena, ";");
+            while (tokens3.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens3.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos2.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos2.size(); i++) {
+                    System.out.println(CamposLeidos2.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            String palabra2 = "";
+            int largo = -1;
+            if (CamposLeidos2.size() != 0) {
+                for (int i = 0; i < CamposLeidos2.size(); i++) {
+                    if ((CamposLeidos2.get(i)).charAt(0) == 'S' || (CamposLeidos2.get(i)).charAt(0) == 's') {
+                        CamposLeido2.add("String");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra2 += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra2);
+                        palabra2 = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'I' || (CamposLeidos2.get(i)).charAt(0) == 'i') {
+                        CamposLeido2.add("Int");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 4; j < largo; j++) {
+                            palabra2 += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra2);
+                        palabra2 = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'C' || (CamposLeidos2.get(i)).charAt(0) == 'c') {
+                        CamposLeido2.add("Char");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra2 += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra2);
+                        palabra2 = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'L' || (CamposLeidos2.get(i)).charAt(0) == 'l') {
+                        CamposLeido2.add("Long");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 5; j < largo; j++) {
+                            palabra2 += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra2);
+                        palabra2 = "";
+                    } else if ((CamposLeidos2.get(i)).charAt(0) == 'D' || (CamposLeidos2.get(i)).charAt(0) == 'd') {
+                        CamposLeido2.add("Double");
+                        largo = (CamposLeidos2.get(i)).length();
+                        for (int j = 7; j < largo; j++) {
+                            palabra2 += (CamposLeidos2.get(i)).charAt(j);
+                        }
+                        CamposLeido2.add(palabra2);
+                        palabra2 = "";
+                    }
+                }
+                for (int i = 0; i < CamposLeido2.size(); i++) {
+                    System.out.println(CamposLeido2.get(i));
+                }
+
+                for (int i = 0; i < CamposLeido2.size(); i++) {
+                    if (i % 2 == 0) {
+                        Object[] row = {CamposLeido2.get(i), CamposLeido2.get(i + 1)};
+                        modelT2.addRow(row);
+                    }
+                }
+            }
+        }
+        Fusion.pack();
+        Fusion.show();
+        Fusion.setVisible(true);
+        Fusion.setEnabled(true);
+        CamposLeidos2.clear();
+        CamposLeidos.clear();
+    }//GEN-LAST:event_CruzarArchivosActionPerformed
+
+    private void jb_GuardarTodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_GuardarTodoMouseClicked
+        DefaultTableModel ModeloT = (DefaultTableModel) jt_CamposFN.getModel();
+        FileWriter fr = null;
+        BufferedWriter br = null;
+        JFileChooser jfc = new JFileChooser();
+        int seleccion = jfc.showSaveDialog(this);
+        if (seleccion == JFileChooser.APPROVE_OPTION) {
+            try {
+                File fichero = jfc.getSelectedFile();
+                fr = new FileWriter(fichero);
+                br = new BufferedWriter(fr);
+                if (ModeloT.getRowCount() > 0) {
+                    int Largo = ModeloT.getRowCount();
+                    for (int i = 0; i < Largo; i++) {
+                        String T1 = (String) ModeloT.getValueAt(i, 0);
+                        String T2 = (String) ModeloT.getValueAt(i, 1);
+                        br.write(T1 + "|" + T2 + ";");
+                    }
+                    br.flush();
+                    br.close();
+                    fr.close();
+                } else {
+                    JOptionPane.showMessageDialog(jMenu1, "La tabla esta vacia");
+                }
+            } catch (IOException ex) {
+                System.out.println("A la versh");
+            }
+        }
+    }//GEN-LAST:event_jb_GuardarTodoMouseClicked
+
+    private void jb_CampoT2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_CampoT2MouseClicked
+        DefaultTableModel ModeloT = (DefaultTableModel) jt_CamposF2.getModel();
+        DefaultTableModel ModeloT2 = (DefaultTableModel) jt_CamposFN.getModel();
+        int sel = jt_CamposF2.getSelectedRow();
+        if (sel >= 0) {
+            String Tipo = (String) ModeloT.getValueAt(sel, 0);
+            String Nombre = (String) ModeloT.getValueAt(sel, 1);
+            String[] row = {Tipo, Nombre};
+            ModeloT2.addRow(row);
+        }
+    }//GEN-LAST:event_jb_CampoT2MouseClicked
+
+    private void jb_CampoT1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_CampoT1MouseClicked
+        DefaultTableModel ModeloT = (DefaultTableModel) jt_CamposF1.getModel();
+        DefaultTableModel ModeloT2 = (DefaultTableModel) jt_CamposFN.getModel();
+        int sel = jt_CamposF1.getSelectedRow();
+        if (sel >= 0) {
+            String Tipo = (String) ModeloT.getValueAt(sel, 0);
+            String Nombre = (String) ModeloT.getValueAt(sel, 1);
+            String[] row = {Tipo, Nombre};
+            ModeloT2.addRow(row);
+        }
+    }//GEN-LAST:event_jb_CampoT1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2217,6 +2901,7 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem BorrarCampos;
     private javax.swing.JMenuItem BorrarRegistros;
     private javax.swing.JMenuItem BuscarRegistros;
+    private javax.swing.JDialog CambiarExcel;
     private javax.swing.JMenuItem CerrarArchivo;
     private javax.swing.JMenuItem CrearCampos;
     private javax.swing.JMenuItem CrearIndice;
@@ -2224,6 +2909,7 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem Exit;
     private javax.swing.JMenuItem ExportarExcel;
     private javax.swing.JMenuItem ExportarXML;
+    private javax.swing.JDialog Fusion;
     private javax.swing.JMenuItem IntroducirRegistros;
     private javax.swing.JMenuItem ListarCampos;
     private javax.swing.JMenuItem ListarRegistros;
@@ -2243,27 +2929,43 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JPanel jPanel8;
+    private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
+    private javax.swing.JButton jb_AExcel;
     private javax.swing.JButton jb_AgregarCampo;
     private javax.swing.JButton jb_BorrandoCampos;
     private javax.swing.JButton jb_BorrarCampo;
+    private javax.swing.JButton jb_CampoT1;
+    private javax.swing.JButton jb_CampoT2;
     private javax.swing.JButton jb_GuardarC;
+    private javax.swing.JButton jb_GuardarTodo;
     private javax.swing.JButton jb_LlavePrimaria;
     private javax.swing.JButton jjb_ModCampos;
     private javax.swing.JList<Campos> jl_Campos;
     private javax.swing.JTable jt_BorrarCampos;
     private javax.swing.JTable jt_Campos;
+    private javax.swing.JTable jt_CamposF1;
+    private javax.swing.JTable jt_CamposF2;
+    private javax.swing.JTable jt_CamposFN;
     private javax.swing.JTable jt_CamposMod;
     private javax.swing.JTable jt_Registros;
+    private javax.swing.JTable jt_Registros2;
     // End of variables declaration//GEN-END:variables
    public static String fixedLengthString(String string) {
         return String.format("%1$-" + (19) + "s", string);
