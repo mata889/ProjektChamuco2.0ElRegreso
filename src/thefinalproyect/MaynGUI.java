@@ -107,7 +107,6 @@ public class MaynGUI extends javax.swing.JFrame {
         CruzarArchivos = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         CrearIndice = new javax.swing.JMenuItem();
-        ReIndexarArchviso = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         ExportarExcel = new javax.swing.JMenuItem();
         ExportarXML = new javax.swing.JMenuItem();
@@ -391,7 +390,7 @@ public class MaynGUI extends javax.swing.JFrame {
         Registros.setTitle("Modificacion de campos");
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Lista de campos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
+        jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registros", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 3, 14))); // NOI18N
 
         jt_Registros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -459,6 +458,8 @@ public class MaynGUI extends javax.swing.JFrame {
             RegistrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
+
+        jPanel6.getAccessibleContext().setAccessibleName("ModificarRegistros");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -543,6 +544,11 @@ public class MaynGUI extends javax.swing.JFrame {
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Registros");
+        jMenu3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenu3ActionPerformed(evt);
+            }
+        });
 
         IntroducirRegistros.setText("Crear Registros");
         IntroducirRegistros.addActionListener(new java.awt.event.ActionListener() {
@@ -569,6 +575,11 @@ public class MaynGUI extends javax.swing.JFrame {
         jMenu3.add(ModificarRegistros);
 
         BuscarRegistros.setText("Buscar Registros");
+        BuscarRegistros.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BuscarRegistrosActionPerformed(evt);
+            }
+        });
         jMenu3.add(BuscarRegistros);
 
         BorrarRegistros.setText("Borrar Registros");
@@ -593,9 +604,6 @@ public class MaynGUI extends javax.swing.JFrame {
             }
         });
         jMenu4.add(CrearIndice);
-
-        ReIndexarArchviso.setText("ReIndexar Archivos");
-        jMenu4.add(ReIndexarArchviso);
 
         jMenuBar1.add(jMenu4);
 
@@ -651,6 +659,41 @@ public class MaynGUI extends javax.swing.JFrame {
     private void SalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarActionPerformed
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            DefaultListModel Modelo = (DefaultListModel) jl_Campos.getModel();
+            if (Modelo.getSize() != 0) {
+                FileWriter fw = null;
+                BufferedWriter bw = null;
+                try {
+                    fw = new FileWriter(ArchivoActual, true);
+                } catch (IOException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                bw = new BufferedWriter(fw);
+                try {
+                    for (int i = 0; i < Modelo.getSize(); i++) {
+                        Campos CL = (Campos) Modelo.get(i);
+
+                        bw.write(CL.toString());
+
+                    }
+                    bw.flush();
+                    JOptionPane.showMessageDialog(AgregarCampos, "Se han guardado los campos en " + ArchivoActual);
+                    AgregarCampos.dispose();
+
+                    try {
+                        fw.close();
+                        bw.close();
+                    } catch (Exception Ex) {
+                    }
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Esto se fue a la mier**");
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "La lista esta actualmente vacia");
+
+            }
+            JOptionPane.showMessageDialog(this, "Normalmente al hacer un cambio, se guarda automaticamente");
         }
     }//GEN-LAST:event_SalvarActionPerformed
 
@@ -659,12 +702,111 @@ public class MaynGUI extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
             ArchivoActual = null;
+            CamposLeidos.clear();
+            llaves = new ArrayList();
+            arbol = new ArbolitoB(4);
+            LenghtPorLinea = CamposLeidos.size() * 20;
+            QueModificar = null;
             JOptionPane.showMessageDialog(this, "Se ha cerrado el archivo");
         }
     }//GEN-LAST:event_CerrarArchivoActionPerformed
 
     private void CrearIndiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearIndiceActionPerformed
-        // TODO add your handling code here:
+        if (ArchivoActual == null) {
+            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        } else {
+            CamposLeidos.clear();
+            String cadena = "";
+            String cadena2 = "";
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            String line;
+            try {
+                int cont = 0;
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                while ((line = br.readLine()) != null) {
+
+                    ContadorLineas++;
+                    cont++;
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            for (int i = 0; i < CamposLeidos.size(); i++) {
+                if (CamposLeidos.get(i).contains("*")) {
+                    if (CamposLeidos.get(i).contains("Integer")) {
+                        QueModificar = "Integer";
+                    }
+                    if (CamposLeidos.get(i).contains("Double")) {
+                        QueModificar = "Double";
+                    }
+                    if (CamposLeidos.get(i).contains("Long")) {
+                        QueModificar = "Long";
+                    }
+                    UbicacionLlave = i;
+                } else if (CamposLeidos.get(i).contains("Integer") || CamposLeidos.get(i).contains("Double") || CamposLeidos.get(i).contains("Long")) {
+                    JOptionPane.showMessageDialog(this, "Ninguno de los campos se ha seleccionado para llave primaria, usaremos la predeterminada");
+                    if (CamposLeidos.get(i).contains("Integer")) {
+                        QueModificar = "Integer";
+                    }
+                    if (CamposLeidos.get(i).contains("Double")) {
+                        QueModificar = "Double";
+                    }
+                    if (CamposLeidos.get(i).contains("Long")) {
+                        QueModificar = "Long";
+                    }
+                    UbicacionLlave = i;
+                }
+            }
+
+            for (int i = 1; i < ContadorLineas; i++) {
+                try (Stream<String> lines = Files.lines(Paths.get(ArchivoActual))) {
+                    String line32 = lines.skip(i).findFirst().get();
+                    String line3 = line32.substring(20 * UbicacionLlave, (20 * UbicacionLlave) + 19);
+                    //System.out.println(line3);
+                    line3 = line3.replace(" ", "");
+                    //int numerito=parse(line3);
+                    llaves.add(new Llaves(Integer.valueOf(line3), UbicacionLlave, line32));
+                    //System.out.println(line32);
+                } catch (Exception ex) {
+                    //Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            for (int i = 0; i < llaves.size(); i++) {
+                arbol.insert(arbol, llaves.get(i).getLlave());
+            }
+            arbol.print(arbol.raiz);
+
+        }
+        JOptionPane.showMessageDialog(this, "Se ha creado el arbol");
     }//GEN-LAST:event_CrearIndiceActionPerformed
 
     private void ListarCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarCamposActionPerformed
@@ -776,37 +918,54 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ListarCamposActionPerformed
 
     private void CrearCamposActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CrearCamposActionPerformed
-        BufferedReader br = null;
-        try {
-            br = new BufferedReader(new FileReader(ArchivoActual));
 
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
-        }
         if (ArchivoActual == null) {
-            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
-
+            JOptionPane.showMessageDialog(this, "No ha seleccionado el archivo");
         } else {
+            BufferedReader br = null;
+            jb_GuardarC.setVisible(false);
+            DefaultListModel listModel = (DefaultListModel) jl_Campos.getModel();
+            listModel.removeAllElements();
             try {
-                if (br.readLine() != null) {
-                    JOptionPane.showMessageDialog(this, "Ya existe Los Campos");
-                } else {
-                    AgregarCampos.pack();
-                    AgregarCampos.show();
-                    AgregarCampos.setVisible(true);
-                    AgregarCampos.setEnabled(true);
-                }
-            } catch (IOException ex) {
+                br = new BufferedReader(new FileReader(ArchivoActual));
+
+            } catch (FileNotFoundException ex) {
                 Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+            if (ArchivoActual == null) {
+                JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
 
+            } else {
+                try {
+                    if (br.readLine() != null) {
+                        JOptionPane.showMessageDialog(this, "Ya existe Los Campos");
+                    } else {
+                        AgregarCampos.pack();
+                        AgregarCampos.show();
+                        AgregarCampos.setVisible(true);
+                        AgregarCampos.setEnabled(true);
+                    }
+                } catch (IOException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }//GEN-LAST:event_CrearCamposActionPerformed
 
     private void jb_AgregarCampoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_AgregarCampoMouseClicked
-        String Tipo, Nombre;
+        String Tipo = "", Nombre;
+        boolean tipo = true;
         Nombre = JOptionPane.showInputDialog(this, "Introdusca el nombre del campo");
-        Tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo del dato (String, Integer, Double, Character, etc.");
+        while (tipo) {
+            Tipo = JOptionPane.showInputDialog(this, "Ingrese el tipo del dato (String, Integer, Double, Character,Long");
+            if (Tipo.contains("String") || Tipo.contains("Integer") || Tipo.contains("Double") || Tipo.contains("Character") || Tipo.contains("Long")) {
+                tipo = false;
+            } else {
+                JOptionPane.showMessageDialog(this, "PORFAVOR INTRODUZCA STRING INTEGER DOUBLE CHARACTER O LONG ");
+                tipo = true;
+            }
+        }
+
         Campos c = new Campos(Tipo, Nombre);
         DefaultListModel Modelo = (DefaultListModel) jl_Campos.getModel();
         Modelo.addElement(c);
@@ -816,11 +975,17 @@ public class MaynGUI extends javax.swing.JFrame {
         DefaultListModel Modelo = (DefaultListModel) jl_Campos.getModel();
         if (!jl_Campos.isSelectionEmpty()) {
             Campos CL = jl_Campos.getSelectedValue();
-            CL.setNombre("*" + CL.getNombre());
+            if (!CL.getTipo().equals("Integer")) {
+                JOptionPane.showMessageDialog(this, "Porfavor escoja como llave primaria un Integer,Double,o Long");
+            } else {
+                CL.setNombre("*" + CL.getNombre());
+                jb_LlavePrimaria.setVisible(false);
+            }
+
         } else {
             JOptionPane.showMessageDialog(this, "No hay ningun elemento seleccionado");
         }
-        jb_LlavePrimaria.setVisible(false);
+
     }//GEN-LAST:event_jb_LlavePrimariaMouseClicked
 
     private void jb_GuardarCMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jb_GuardarCMouseClicked
@@ -1157,9 +1322,11 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jb_BorrandoCamposMouseClicked
 
     private void IntroducirRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IntroducirRegistrosActionPerformed
+
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
+            CamposLeidos.clear();
             String Registro = "";
             String cadena = "";
             String cadena2 = "";
@@ -1217,7 +1384,7 @@ public class MaynGUI extends javax.swing.JFrame {
                                 String Temporal;
                                 Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Integer de: *" + CamposLeidos.get(i).substring(8, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
                                 for (int j = 0; j < Temporal.length(); j++) {
-                                    if (!Character.isDigit(Temporal.charAt(i))) {
+                                    if (!Character.isDigit(Temporal.charAt(j))) {
                                         numero = true;
                                     }
                                 }
@@ -1249,7 +1416,7 @@ public class MaynGUI extends javax.swing.JFrame {
                                 String Temporal;
                                 Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Long de: *" + CamposLeidos.get(i).substring(5, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
                                 for (int j = 0; j < Temporal.length(); j++) {
-                                    if (!Character.isDigit(Temporal.charAt(i))) {
+                                    if (!Character.isDigit(Temporal.charAt(j))) {
                                         numero = true;
                                     }
                                 }
@@ -1267,7 +1434,7 @@ public class MaynGUI extends javax.swing.JFrame {
                                 String Temporal;
                                 Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Double de: *" + CamposLeidos.get(i).substring(8, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
                                 for (int j = 0; j < Temporal.length(); j++) {
-                                    if (!Character.isDigit(Temporal.charAt(i))) {
+                                    if (!Character.isDigit(Temporal.charAt(j))) {
                                         numero = true;
                                     }
                                 }
@@ -1282,7 +1449,7 @@ public class MaynGUI extends javax.swing.JFrame {
                     }
                 }
             }
-            CamposLeidos.clear();
+
             System.out.println(Registro);
             BufferedReader br2 = null;
             FileReader fr2 = null;
@@ -1305,20 +1472,322 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_IntroducirRegistrosActionPerformed
 
     private void ModificarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarRegistrosActionPerformed
-        if (ArchivoActual == null) {
-            JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
+        if (QueModificar == null) {
+            JOptionPane.showMessageDialog(this, "Porfavor indexe para usar esta opcion");
         } else {
+            ArrayList Again = new ArrayList();
+            CamposLeidos.clear();
+            String cadena = "", cadena2 = "";
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                Again.add(cadena);
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            int NumeroABuscar = 0;
+            Boolean numero1 = true;
+            while (numero1) {
+                try {
+                    String Temporal;
+                    Temporal = JOptionPane.showInputDialog(this, "Introduzca el " + QueModificar + "que quiere buscar");
+                    for (int j = 0; j < Temporal.length(); j++) {
+                        if (!Character.isDigit(Temporal.charAt(j))) {
+                            numero1 = true;
+                        }
+                    }
+                    NumeroABuscar = Integer.parseInt(Temporal);
+                    numero1 = false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                    numero1 = true;
+                }
+            }
+            arbol.ImpBuscar(arbol, NumeroABuscar);
+            if (arbol.Existe(arbol, NumeroABuscar)) {
+                JOptionPane.showMessageDialog(this, "Se ha encontrado");
+
+                int contador = 0;
+
+                try {
+                    fr = new FileReader(ArchivoActual);
+                    br = new BufferedReader(fr);
+                    String Registro = "";
+
+                    for (int k = 0; k < llaves.size(); k++) {
+                        if (NumeroABuscar == llaves.get(k).getLlave()) {
+                            if (CamposLeidos.size() != 0) {
+                                for (int i = 0; i < CamposLeidos.size(); i++) {
+                                    String Temp = "";
+                                    int Numerin = 0;
+                                    String caraceter = "";
+                                    long largo = 0;
+                                    double doble = 0;
+                                    if ((CamposLeidos.get(i)).charAt(0) == 'S' || (CamposLeidos.get(i)).charAt(0) == 's') {//String
+                                        Boolean length = true;
+                                        while (length) {
+                                            Temp = JOptionPane.showInputDialog(this, "Introduzca el campo tipo String de: *" + CamposLeidos.get(i).substring(7, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                            if (Temp.length() < 19) {
+                                                length = false;
+                                            } else {
+                                                length = true;
+                                            }
+                                            // System.out.println(Temp.length());
+                                        }
+                                        Registro += fixedLengthString(Temp) + "|";
+                                    } else if ((CamposLeidos.get(i)).charAt(0) == 'I' || (CamposLeidos.get(i)).charAt(0) == 'i') {//Integer
+                                        Boolean numero = true;
+                                        while (numero) {
+                                            try {
+                                                String Temporal;
+                                                Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Integer de: *" + CamposLeidos.get(i).substring(8, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                                for (int j = 0; j < Temporal.length(); j++) {
+                                                    if (!Character.isDigit(Temporal.charAt(j))) {
+                                                        numero = true;
+                                                    }
+                                                }
+                                                Registro += fixedLengthString((Temporal)) + "|";
+                                                numero = false;
+                                            } catch (Exception e) {
+                                                JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                                                numero = true;
+                                            }
+                                        }
+
+                                    } else if ((CamposLeidos.get(i)).charAt(0) == 'C' || (CamposLeidos.get(i)).charAt(0) == 'c') {//Character
+                                        Boolean length = true;
+                                        String Temporal = "";
+                                        while (length) {
+                                            Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Character de: *" + CamposLeidos.get(i).substring(10, CamposLeidos.get(i).length()) + "* 1Caraccter porfavor");
+                                            if (Temporal.length() > 1) {
+                                                length = true;
+                                                JOptionPane.showMessageDialog(this, "Porfavor siga las indicaciones");
+                                            } else {
+                                                length = false;
+                                            }
+                                        }
+                                        Registro += fixedLengthString((Temporal)) + "|";
+                                    } else if ((CamposLeidos.get(i)).charAt(0) == 'L' || (CamposLeidos.get(i)).charAt(0) == 'l') {//Long
+                                        Boolean numero = true;
+                                        while (numero) {
+                                            try {
+                                                String Temporal;
+                                                Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Long de: *" + CamposLeidos.get(i).substring(5, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                                for (int j = 0; j < Temporal.length(); j++) {
+                                                    if (!Character.isDigit(Temporal.charAt(j))) {
+                                                        numero = true;
+                                                    }
+                                                }
+                                                Registro += fixedLengthString((Temporal)) + "|";
+                                                numero = false;
+                                            } catch (Exception e) {
+                                                JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                                                numero = true;
+                                            }
+                                        }
+                                    } else if ((CamposLeidos.get(i)).charAt(0) == 'D' || (CamposLeidos.get(i)).charAt(0) == 'd') {//Double
+                                        Boolean numero = true;
+                                        while (numero) {
+                                            try {
+                                                String Temporal;
+                                                Temporal = JOptionPane.showInputDialog(this, "Introduzca el campo tipo Double de: *" + CamposLeidos.get(i).substring(8, CamposLeidos.get(i).length()) + "* menor de 20 Caracteres");
+                                                for (int j = 0; j < Temporal.length(); j++) {
+                                                    if (!Character.isDigit(Temporal.charAt(j))) {
+                                                        numero = true;
+                                                    }
+                                                }
+                                                Registro += fixedLengthString((Temporal)) + "|";
+                                                numero = false;
+                                            } catch (Exception e) {
+                                                JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                                                numero = true;
+                                            }
+                                        }
+
+                                    }
+                                }
+                            }
+                            Again.add(Registro);
+                        } else {
+                            Again.add(llaves.get(k).demas);
+
+                        }
+                        contador++;
+                    }
+                } catch (Exception e) {
+                    System.out.println("ERROR!!ERROR!!ERROR!!");
+                }
+                BufferedWriter br2 = null;
+                FileWriter fr2 = null;
+                try {
+                    // System.out.println(Again.get(i));
+                    fr2 = new FileWriter(ArchivoActual, false);
+                    br2 = new BufferedWriter(fr2);
+                } catch (IOException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (int i = 0; i < Again.size(); i++) {
+                    try {
+                        br2.write(Again.get(i).toString());
+                        br2.newLine();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                try {
+                    br2.flush();
+                } catch (IOException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                QueModificar = null;
+                arbol = new ArbolitoB(4);
+                llaves.clear();
+                JOptionPane.showMessageDialog(this, "Gracias a que se ha rescribido el archivo, debera indexar de nuevo el arbol");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe la llave");
+            }
         }
+
     }//GEN-LAST:event_ModificarRegistrosActionPerformed
 
     private void BorrarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrarRegistrosActionPerformed
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
+            ArrayList Again = new ArrayList();
+            CamposLeidos.clear();
+            String cadena = "", cadena2 = "";
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                Again.add(cadena);
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            int NumeroABuscar = 0;
+            Boolean numero1 = true;
+            while (numero1) {
+                try {
+                    String Temporal;
+                    Temporal = JOptionPane.showInputDialog(this, "Introduzca el " + QueModificar + "que quiere buscar");
+                    for (int j = 0; j < Temporal.length(); j++) {
+                        if (!Character.isDigit(Temporal.charAt(j))) {
+                            numero1 = true;
+                        }
+                    }
+                    NumeroABuscar = Integer.parseInt(Temporal);
+                    numero1 = false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                    numero1 = true;
+                }
+            }
+            arbol.ImpBuscar(arbol, NumeroABuscar);
+            if (arbol.Existe(arbol, NumeroABuscar)) {
+                JOptionPane.showMessageDialog(this, "Se ha encontrado");
+
+                int contador = 0;
+
+                try {
+                    fr = new FileReader(ArchivoActual);
+                    br = new BufferedReader(fr);
+                    String Registro = "";
+
+                    for (int k = 0; k < llaves.size(); k++) {
+                        if (NumeroABuscar == llaves.get(k).getLlave()) {
+
+                            //Again.add("*" + llaves.get(k).demas);
+                        } else {
+                            Again.add(llaves.get(k).demas);
+
+                        }
+                        contador++;
+                    }
+                } catch (Exception e) {
+                    System.out.println("ERROR!!ERROR!!ERROR!!");
+                }
+                BufferedWriter br2 = null;
+                FileWriter fr2 = null;
+                try {
+                    // System.out.println(Again.get(i));
+                    fr2 = new FileWriter(ArchivoActual, false);
+                    br2 = new BufferedWriter(fr2);
+                } catch (IOException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                for (int i = 0; i < Again.size(); i++) {
+                    try {
+                        br2.write(Again.get(i).toString());
+                        br2.newLine();
+                    } catch (IOException ex) {
+                        Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                try {
+                    br2.flush();
+                } catch (IOException ex) {
+                    Logger.getLogger(MaynGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                QueModificar = null;
+                arbol = new ArbolitoB(4);
+                llaves.clear();
+                JOptionPane.showMessageDialog(this, "Gracias a que se ha rescribido el archivo, debera indexar de nuevo el arbol");
+
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe la llave");
+            }
         }
     }//GEN-LAST:event_BorrarRegistrosActionPerformed
 
     private void ListarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarRegistrosActionPerformed
+        CamposLeidos.clear();
         if (ArchivoActual == null) {
             JOptionPane.showMessageDialog(this, "No se ha creado un archivo");
         } else {
@@ -1425,7 +1894,7 @@ public class MaynGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_bt_anterioHierarchyChanged
 
     private void bt_siguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt_siguienteActionPerformed
-        
+
         if (ContadorMundial < 25) {
             System.out.println("no hay suficiente");
         } else {
@@ -1626,6 +2095,86 @@ public class MaynGUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_bt_anterioActionPerformed
 
+    private void jMenu3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu3ActionPerformed
+
+    }//GEN-LAST:event_jMenu3ActionPerformed
+
+    private void BuscarRegistrosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarRegistrosActionPerformed
+        if (QueModificar == null) {
+            JOptionPane.showMessageDialog(this, "Porfavor indexe para usar esta opcion");
+        } else {
+            ArrayList Again = new ArrayList();
+            CamposLeidos.clear();
+            String cadena = "", cadena2 = "";
+            BufferedReader br = null;
+            FileReader fr = null;
+            try {
+                fr = new FileReader(ArchivoActual);
+                br = new BufferedReader(fr);
+                cadena = br.readLine();
+                Again.add(cadena);
+            } catch (Exception e) {
+                System.out.println("ERROR!!ERROR!!ERROR!!");
+            }
+            ////////////////////////////////
+            StringTokenizer tokens;
+            tokens = new StringTokenizer(cadena, ";");
+            while (tokens.hasMoreTokens()) {
+                cadena2 = cadena2 + ";" + tokens.nextToken();
+                System.out.println(cadena2);
+            }
+            if (cadena2 != "") {
+                StringTokenizer tokens2;
+                tokens2 = new StringTokenizer(cadena2, ";");
+                while (tokens2.hasMoreTokens()) {
+                    CamposLeidos.add(tokens2.nextToken());
+                }
+                for (int i = 0; i < CamposLeidos.size(); i++) {
+                    System.out.println(CamposLeidos.get(i));
+                }
+
+            } else {
+                System.out.println("No hay nada");
+            }
+            int NumeroABuscar = 0;
+            Boolean numero1 = true;
+            while (numero1) {
+                try {
+                    String Temporal;
+                    Temporal = JOptionPane.showInputDialog(this, "Introduzca el " + QueModificar + "que quiere buscar");
+                    for (int j = 0; j < Temporal.length(); j++) {
+                        if (!Character.isDigit(Temporal.charAt(j))) {
+                            numero1 = true;
+                        }
+                    }
+                    NumeroABuscar = Integer.parseInt(Temporal);
+                    numero1 = false;
+                } catch (Exception e) {
+                    JOptionPane.showMessageDialog(this, "Introduzca Numeros ");
+                    numero1 = true;
+                }
+            }
+            arbol.ImpBuscar(arbol, NumeroABuscar);
+            String Registro = "";
+            for (int k = 0; k < llaves.size(); k++) {
+
+                Again.add(llaves.get(k).demas);
+
+                contador++;
+            }
+            if (arbol.Existe(arbol, NumeroABuscar)) {
+                JOptionPane.showMessageDialog(this, "Se ha encontrado");
+                for (int i = 0; i < Again.size(); i++) {
+                    if (Again.get(i).toString().contains(Integer.toString(NumeroABuscar))) {
+                        JOptionPane.showMessageDialog(this, Again.get(i).toString().substring(0, 19) + "TE HEMOS ENCONTRADO!!!");
+                    }
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe la llave");
+            }
+        }
+    }//GEN-LAST:event_BuscarRegistrosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1682,7 +2231,6 @@ public class MaynGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem ModificarCampos;
     private javax.swing.JMenuItem ModificarRegistros;
     private javax.swing.JMenuItem Nuevo;
-    private javax.swing.JMenuItem ReIndexarArchviso;
     private javax.swing.JDialog Registros;
     private javax.swing.JMenuItem Salvar;
     private javax.swing.JDialog TablaCampos;
@@ -1720,6 +2268,13 @@ public class MaynGUI extends javax.swing.JFrame {
    public static String fixedLengthString(String string) {
         return String.format("%1$-" + (19) + "s", string);
     }
+
+    public int parse(String n) {
+        return Integer.parseInt(n);
+    }
+
+    int ContadorLineas;
+    int UbicacionLlave;
     String ArchivoActual;
     String TipoCampo = "";
     int contador = 0;
@@ -1731,5 +2286,9 @@ public class MaynGUI extends javax.swing.JFrame {
     ArrayList<String> CamposLeidos2 = new ArrayList();
     ArrayList<String> CamposLeidos3 = new ArrayList();
     int contadorPagina = 0;
-    int ContadorMundial=0;
+    int ContadorMundial = 0;
+    ArrayList<Llaves> llaves = new ArrayList();
+    ArbolitoB arbol = new ArbolitoB(4);
+    int LenghtPorLinea = CamposLeidos.size() * 20;
+    String QueModificar;
 }

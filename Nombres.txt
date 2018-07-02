@@ -1,4 +1,4 @@
-Integer|*Numero;String|Nombre;String|Apellido;Integer|Numero;
+﻿Integer|*Numero;String|Nombre;String|Apellido;Integer|ID;
 0                  |Marco              |Tomtate            |95                 
 1                  |Deku               |Borjas             |73                 
 2                  |Deku               |Sanchez            |47                 

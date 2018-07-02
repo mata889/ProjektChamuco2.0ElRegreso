@@ -62,6 +62,7 @@ public class ArbolitoB {//un arbol en base a numeros
         }
     }
 //metodo de insercion de la llave, ya que esta llave es numeros solamente
+
     public void insert(ArbolitoB t, int llave) {
         NodosB r = t.raiz;
         if (r.contador == 2 * orden - 1) {
@@ -82,7 +83,7 @@ public class ArbolitoB {//un arbol en base a numeros
             System.out.print(n.getValor(i) + " ");
         }
         if (!n.hoja) {//si no es hoja
-            System.out.print("no hijo");
+            //System.out.print("no hijo");
             for (int i = 0; i <= n.contador; i++) {
                 if (n.getHijo(i) != null) {
                     System.out.println();
@@ -90,13 +91,13 @@ public class ArbolitoB {//un arbol en base a numeros
                 }
             }
         }
+        System.out.println("");
     }
 
-    
     /*
     este metodo de buscar para el nodo recivido donde queremos insertar el valor
     de la llave, para otro metodo
-    */
+     */
     public NodosB Buscar(NodosB raiz, int llave) {
         int i = 0;//empezar del indice 0 de un nodo
         while (i < raiz.contador && llave > raiz.llave[i]) { //incrementando en el nodo mientra la llave sea > al valor actual     
@@ -111,42 +112,49 @@ public class ArbolitoB {//un arbol en base a numeros
             return Buscar(raiz.getHijo(i), llave);
         }
     }
+
     //borra llave del arbol pero no del archivo, aun
-    public void Borrar(ArbolitoB t,int llave){
-       NodosB temp=new NodosB(orden,null);
-       temp=Buscar(t.raiz,llave);
-        if (temp.hoja && temp.contador>orden -1) {
-            int i=0;
-            while(llave>temp.getValor(i)){
-             i++;
+    public void Borrar(ArbolitoB t, int llave) {
+        NodosB temp = new NodosB(orden, null);
+        temp = Buscar(t.raiz, llave);
+        if (temp.hoja && temp.contador > orden - 1) {
+            int i = 0;
+            while (llave > temp.getValor(i)) {
+                i++;
             }
-            for (int j = i; j < 2*orden-2; j++) {
-                temp.llave[j]=temp.getValor(j+1);
+            for (int j = i; j < 2 * orden - 2; j++) {
+                temp.llave[j] = temp.getValor(j + 1);
             }
-            temp.contador --;
-        }else{
+            temp.contador--;
+        } else {
             System.out.println("Este nodo no es una hoja o tiene menos de una llave");
         }
     }
+
     //este metodo nos ayuda a imprimir la linea o en el nivel en que esta la llave
-    public void ImpBuscar( ArbolitoB T,int x)
-	{
-		NodosB temp= new NodosB(orden,null);
+    public void ImpBuscar(ArbolitoB T, int x) {
+        NodosB temp = new NodosB(orden, null);
 
-		temp= Buscar(T.raiz,x);
+        temp = Buscar(T.raiz, x);
 
-		if (temp==null)
-		{
+        if (temp == null) {
+            System.out.println("");
+            //System.out.println("No existe la llave");
+        } else {
 
-		System.out.println("No existe la llave");
-		}
+            print(temp);
+        }
 
-		else
-		{
+    }
 
-		print(temp);
-		}
+    public boolean Existe(ArbolitoB T, int x) {
+        NodosB temp = new NodosB(orden, null);
+        temp = Buscar(T.raiz, x);
+        if (temp == null) {
+            return false;
+        } else {
+            return true;
+        }
 
-
-	}
+    }
 }
