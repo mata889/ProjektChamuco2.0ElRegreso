@@ -1,1 +1,0 @@
-String|Mata;String|POruqe;String|No;String|*Funciona;String|Que;
